@@ -1,4 +1,4 @@
-import RegisterForm from './modules/RegisterForm';
+import RegisterForm from "./modules/RegisterForm";
 
 export function RegisterPage() {
   return (

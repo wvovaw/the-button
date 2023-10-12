@@ -1,8 +1,8 @@
-import { FormEvent } from 'react';
-import { signUp } from '@/api/services/signup';
-import { useNavigate } from 'react-router-dom';
+import { FormEvent } from "react";
+import { signUp } from "@/api/services/signup";
+import { useNavigate } from "react-router-dom";
 
-export default function () {
+export default function RegisterForm() {
   const navigate = useNavigate();
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -15,10 +15,10 @@ export default function () {
 
     if (password === confirmPassword)
       try {
-        const signUpData = await signUp({ email, name, password });
-        navigate('/login');
+        await signUp({ email, name, password });
+        navigate("/login");
       } catch (e: unknown) {
-        alert('Somthing went wrong');
+        alert("Somthing went wrong");
         console.log(e);
       }
     else alert("Password and cofirm didn't match");

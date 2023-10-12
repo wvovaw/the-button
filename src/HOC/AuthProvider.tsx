@@ -1,9 +1,9 @@
-import { type PropsWithChildren, createContext, useState, useMemo, useEffect } from 'react';
-import client from '@/api/client';
-import { type UserProfile } from '@/types';
+import { type PropsWithChildren, createContext, useState, useMemo, useEffect, useCallback } from "react";
+import client from "@/api/client";
+import { type UserProfile } from "@/api/types";
 
-type SignInFnType = (params: UserProfile, cb: () => any) => void;
-type SignOutFnType = (cb: () => any) => void;
+type SignInFnType = (params: UserProfile, cb: () => void) => void;
+type SignOutFnType = (cb: () => void) => void;
 
 type AuthContextType = {
   user: UserProfile | null;
@@ -13,27 +13,26 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [user, setUser] = useState<UserProfile | null>(JSON.parse(localStorage.getItem('user-profile') ?? 'null'));
+  const [user, setUser] = useState<UserProfile | null>(JSON.parse(localStorage.getItem("user-profile") ?? "null"));
 
   useEffect(() => {
     if (user) {
-      client.defaults.headers.common['Authorization'] = user.accessToken;
-      localStorage.setItem('user-profile', JSON.stringify(user));
+      client.defaults.headers.common["Authorization"] = user.accessToken;
+      localStorage.setItem("user-profile", JSON.stringify(user));
     } else {
-      delete client.defaults.headers.common['Authorization'];
-      localStorage.removeItem('user-profile');
+      delete client.defaults.headers.common["Authorization"];
+      localStorage.removeItem("user-profile");
     }
   }, [user]);
 
-  const signIn = (params: UserProfile, cb: () => any) => {
+  const signIn = useCallback((params: UserProfile, cb: () => void) => {
     setUser(params);
     cb();
-  };
-
-  const signOut = (cb: () => {}) => {
+  }, []);
+  const signOut = useCallback((cb: () => void) => {
     setUser(null);
     cb();
-  };
+  }, []);
 
   const value: AuthContextType = useMemo(
     () => ({
@@ -41,7 +40,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       signIn,
       signOut,
     }),
-    [user],
+    [user, signIn, signOut],
   );
   return <AuthContext.Provider value={value}> {children} </AuthContext.Provider>;
 }

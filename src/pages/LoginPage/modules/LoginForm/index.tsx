@@ -1,15 +1,15 @@
-import { type FormEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { signIn } from '@/api/services/signin';
-import { userAuth } from '@/hooks/useAuth';
-import jwtDecode from 'jwt-decode';
-import { UserProfile } from '../../../../types';
+import { type FormEvent } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { signIn } from "@/api/services/signin";
+import { useAuth } from "@/hooks/useAuth";
+import jwtDecode from "jwt-decode";
+import { UserProfile } from "../../../../api/types";
 
-export default function () {
+export default function LoginForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const authCtx = userAuth();
-  const fromPage = location.state?.from?.pathname || '/';
+  const authCtx = useAuth();
+  const fromPage = location.state?.from?.pathname || "/";
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -24,7 +24,7 @@ export default function () {
       });
 
       if (signInData.accessToken) {
-        const payload: Omit<UserProfile, 'accessToken'> = jwtDecode(signInData.accessToken);
+        const payload: Omit<UserProfile, "accessToken"> = jwtDecode(signInData.accessToken);
         authCtx?.signIn(
           {
             accessToken: signInData.accessToken,
@@ -35,10 +35,10 @@ export default function () {
           () => navigate(fromPage, { replace: true }),
         );
       } else {
-        alert('logn failed');
+        alert("logn failed");
       }
     } catch (e: unknown) {
-      alert('logn failed');
+      alert("logn failed");
       console.log(e);
     }
   };

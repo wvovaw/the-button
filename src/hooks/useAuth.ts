@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "@/HOC/AuthProvider";
 
-export function userAuth() {
+export function useAuth() {
   return useContext(AuthContext);
 }
