@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { userAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { getRecordByUserId } from "@/api/services/getRecordByUserId";
 import { updateRecord } from "@/api/services/updateRecord";
 import { createRecord } from "@/api/services/createRecord";
 import { type RecordData } from "@/api/types";
 
 export function useGame() {
-  const authCtx = userAuth();
+  const authCtx = useAuth();
   const [record, setRecord] = useState<RecordData | null>(null);
   const [isLoading, setLoading] = useState(false);
   const [state, setState] = useState({

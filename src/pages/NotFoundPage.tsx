@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 export function NotFoundPage() {
-  return(
+  return (
     <>
-      <div>This page doesn't exist. Go <Link to="/"/> </div>
+      <div>
+        This page doesn't exist. Go <Link to="/" />{" "}
+      </div>
     </>
   );
 }

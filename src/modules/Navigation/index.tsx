@@ -1,10 +1,10 @@
 import { NavigatinMenu } from "./components/NavigationMenu";
 import UserMenu from "./components/UserMenu";
 
-export default function () {
+export default function Navigation() {
   return (
     <>
-      <nav className="bg-slate-200 p-4 flex justify-between">
+      <nav className="flex justify-between bg-slate-200 p-4">
         <NavigatinMenu />
         <UserMenu />
       </nav>
