@@ -8,7 +8,7 @@ import { type RecordData } from "@/api/types";
 export function useGame() {
   const authCtx = useAuth();
   const [record, setRecord] = useState<RecordData | null>(null);
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [state, setState] = useState({
     score: 0,
     attempts: 0,
@@ -32,7 +32,6 @@ export function useGame() {
   useEffect(() => {
     const init = async () => {
       console.log("Run init effect");
-      setLoading(true);
       try {
         if (authCtx?.user) {
           setRecord(await getRecordByUserId(authCtx.user.id));

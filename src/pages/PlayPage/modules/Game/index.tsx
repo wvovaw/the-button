@@ -8,7 +8,11 @@ export default function Game() {
         <div>Tries: {attempts}</div>
       </div>
       <div>
-        <button className="aspect-square w-24 border border-black p-3" onClick={click}>
+        <button
+          className="aspect-square w-24 border border-black p-3 disabled:border-gray-400 disabled:text-gray-400"
+          onClick={click}
+          disabled={isLoading}
+        >
           {score}
         </button>
         <div>{isLoading ? "Loading..." : JSON.stringify(record)}</div>

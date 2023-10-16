@@ -1,7 +1,9 @@
+import LeadersTable from "./modules/LeadersTable";
+
 function LeaderboardPage() {
   return (
     <>
-      <h1>Leaderboard page</h1>
+      <LeadersTable />
     </>
   );
 }
