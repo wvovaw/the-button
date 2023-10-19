@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navigation from "@/modules/Navigation";
+import Navbar from "../modules/Navbar";
 
 export function BaseLayout() {
   return (
     <>
-      <Navigation />
-      <main>
+      <Navbar />
+      <main className="container mt-4">
         <Outlet />
       </main>
     </>
