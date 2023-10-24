@@ -1,4 +1,4 @@
-import Game from "./modules/Game";
+import Game from "@/modules/Game";
 
 function PlayPage() {
   return (
