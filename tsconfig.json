@@ -9,6 +9,7 @@
       "@/*": ["./src/*"],
     },
     "baseUrl": ".",
+    "typeRoots": ["./src/@types", "./node_modules/@types"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
