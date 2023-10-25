@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/Separator";
-import { useGame } from "../contexts/GameContext";
+import { useGame } from "../contexts";
 import { Badge } from "@/components/ui/Badge";
 
 export default function Stats() {

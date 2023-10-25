@@ -1,4 +1,4 @@
-import { GameProvider } from "./contexts/GameContext";
+import { GameProvider } from "./contexts";
 import Stats from "./components/Stats";
 import TheButton from "./components/TheButton";
 import UpdateIndicator from "./components/UpdateIndicator";

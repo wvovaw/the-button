@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { clickAction, useGame } from "../contexts/GameContext";
+import { clickAction, useGame } from "../contexts";
 
 export default function TheButton() {
   const game = useGame();
