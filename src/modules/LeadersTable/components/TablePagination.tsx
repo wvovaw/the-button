@@ -28,7 +28,9 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
         </SelectContent>
       </Select>
       <div className="flex items-center justify-end space-x-2">
-        <span className="text-center text-sm">page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}</span>
+        <span className="text-center text-sm">
+          page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </span>
         <Button
           variant="outline"
           size="icon"
@@ -36,7 +38,7 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
-          <ChevronFirst className="w-4 h-4" />
+          <ChevronFirst className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -45,7 +47,7 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          <ChevronLeft className="w-4 h-4" />
+          <ChevronLeft className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -54,7 +56,7 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className="h-4 w-4" />
         </Button>
         <Button
           variant="outline"
@@ -63,7 +65,7 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
-          <ChevronLast className="w-4 h-4" />
+          <ChevronLast className="h-4 w-4" />
         </Button>
       </div>
     </div>

@@ -31,7 +31,7 @@ export function DataTable<TData, TValue>({
   const paginationCached = useMemo(() => ({ ...pagination }), [pagination]);
 
   const table = useReactTable({
-    data, 
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,

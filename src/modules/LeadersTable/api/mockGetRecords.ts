@@ -16,7 +16,7 @@ const newRecord = (): RecordData => {
   return {
     createdAt: faker.date.between({ from: "2023-10-01T00:00:00.000Z", to: "2023-10-20T00:00:00.000Z" }).toISOString(),
     updatedAt: faker.date.between({ from: "2023-10-01T00:00:00.000Z", to: "2023-10-20T00:00:00.000Z" }).toISOString(),
-    highScore: faker.number.int({min: 1, max: 44}),
+    highScore: faker.number.int({ min: 1, max: 44 }),
     totalAttempts: faker.number.int({ min: 60, max: 860 }),
     updatedTimes: faker.number.int({ max: 36 }),
     id: recordId++,
@@ -53,7 +53,7 @@ export async function getRecordsPaginated(options: { page: number; perPage: numb
       // page: Math.ceil(data.length / options.perPage),
       page: options.page,
       perPage: options.perPage,
-      itemsCount: data.length
-    }
+      itemsCount: data.length,
+    },
   };
 }

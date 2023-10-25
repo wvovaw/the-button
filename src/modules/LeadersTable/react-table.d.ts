@@ -1,6 +1,6 @@
-import '@tanstack/react-table'
+import "@tanstack/react-table";
 
-declare module '@tanstack/table-core' {
+declare module "@tanstack/table-core" {
   interface ColumnMeta {
     skeletonClassName?: string;
   }

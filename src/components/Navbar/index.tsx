@@ -45,12 +45,12 @@ function UsernameOrLogin({ className }: { className: string }) {
       <NavigationMenuList className={className}>
         <NavigationMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger className="group flex items-center my-2 text-foreground">
-                <span className="text-base font-normal">{authCtx?.user?.name}</span>
-                <ChevronDown
-                  className="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
-                  aria-hidden="true"
-                />
+            <DropdownMenuTrigger className="group my-2 flex items-center text-foreground">
+              <span className="text-base font-normal">{authCtx?.user?.name}</span>
+              <ChevronDown
+                className="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
+                aria-hidden="true"
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">
               <DropdownMenuItem disabled className="cursor-pointer">

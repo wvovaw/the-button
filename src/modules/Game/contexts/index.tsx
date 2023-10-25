@@ -1,6 +1,6 @@
 import { createContext, useReducer, useContext, useMemo, type Dispatch, type PropsWithChildren } from "react";
 import { useAuth } from "@/hooks/useAuth";
-import { useDebounce, useEffectOnce, useUpdateEffect } from "@/lib/usehooks-ts";
+import { useDebounce, useEffectOnce, useUpdateEffect } from "@/hooks/usehooks-ts";
 
 import { type GameState, type GameActions, gameReducer } from "./GameContext/reducers/gameReducer";
 import { clickAction } from "./GameContext/actions/clickAction";

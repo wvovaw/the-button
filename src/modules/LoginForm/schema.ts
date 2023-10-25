@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email string"),
-  password: z.string().min(8, {message: "Password must be at least 8 chars."}),
+  password: z.string().min(8, { message: "Password must be at least 8 chars." }),
 });
 
 export { loginSchema };
