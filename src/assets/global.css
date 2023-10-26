@@ -59,3 +59,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .inset-x-center {
+    @apply absolute left-1/2 transform -translate-x-1/2;
+  }
+  .inset-y-center {
+    @apply absolute top-1/2 transform -translate-y-1/2;
+  }
+  .inset-center {
+    @apply inset-x-center inset-y-center;
+  }
+}

@@ -6,5 +6,5 @@ export default function ErrorIndicator() {
 
   const { errorMessage } = game.state;
 
-  return <div className="absolute bottom-12 left-20 text-destructive">{errorMessage}</div>;
+  return <div className="absolute bottom-7 left-12 font-semibold text-destructive">{errorMessage}</div>;
 }

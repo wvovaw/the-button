@@ -6,7 +6,7 @@ import ErrorIndicator from "./components/ErrorIndicator";
 
 export default function Game() {
   return (
-    <div className="h-[calc(100vh-80px)] w-full">
+    <div className="h-[calc(100vh-80px)] w-full relative">
       <GameProvider>
         <Stats />
         <TheButton />
