@@ -14,7 +14,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-refresh', 'react-hooks'],
+  plugins: ['@typescript-eslint', 'react', 'react-refresh', 'react-hooks'],
   settings: {
     react: {
       version: 'detect',

@@ -1,4 +1,4 @@
-import { useGame } from "../contexts";
+import { useGame } from "../contexts/GameContext";
 
 export default function ErrorIndicator() {
   const game = useGame();

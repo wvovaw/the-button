@@ -15,20 +15,17 @@ export type SignInRequestData = {
 export type SignInResponseData = {
   accessToken: string;
 };
-export type UserProfile = {
-  id: number;
-  name: string;
-  email: string;
-  accessToken: string;
-};
-export type CreateRecordRequestData = {
-  score: number;
+export type PostRecordRequesData = {
+  highscore?: number;
+  peaks?: number[];
+  clicks?: number;
 };
 export type RecordData = {
   id: number;
-  highScore: number;
-  totalAttempts: number;
-  updatedTimes: number;
+  highscore: number;
+  totalResets: number;
+  totalClicks: number;
+  average: number;
   owner: {
     id: number;
     name: string;
@@ -36,11 +33,7 @@ export type RecordData = {
   createdAt: string;
   updatedAt: string;
 };
-export type UpdateRecordRequestData = {
-  newScore: number;
-  attempts: number;
-};
-export type RecordsPaginatedRequestData = {
+export type RecordsPaginatedQuerystringData = {
   page: number;
   perPage: number;
 };

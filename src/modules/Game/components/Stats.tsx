@@ -1,12 +1,12 @@
 import { PropsWithChildren, type ReactNode } from "react";
-import { useGame } from "../contexts";
+import { useGame } from "../contexts/GameContext";
 import { Skeleton } from "@/components/ui/Skeleton";
 
 export default function Stats() {
   const game = useGame();
   if (!game) throw new Error("Game context isn't available");
 
-  const { resetsCount, totalClicks } = game.state.stats;
+  // const { , totalClicks } = game.state.stats;
   const { currentRecord, isUpdating } = game.state;
 
   return (
@@ -14,22 +14,17 @@ export default function Stats() {
       <div className="inset-x-center top-4 select-none">
         <div className="flex flex-row gap-5 text-base font-semibold text-muted">
           <StatsColumn>
-            <StatsRow label="Clicks" value={totalClicks} />
-            <StatsRow label="Resets" value={resetsCount} />
-          </StatsColumn>
-
-          <StatsColumn>
             {isUpdating ? (
               <>
                 <StatsRow label="Highscore" value={<Skeleton className="h-2 w-6 bg-accent" />} />
-                <StatsRow label="Attempts" value={<Skeleton className="h-2 w-6 bg-accent" />} />
-                {/* <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-6 bg-accent" />} /> */}
+                <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-6 bg-accent" />} />
+                <StatsRow label="AVG" value={<Skeleton className="h-2 w-6 bg-accent" />} />
               </>
             ) : currentRecord ? (
               <>
-                <StatsRow label="Highscore" value={currentRecord.highScore} />
-                <StatsRow label="Attempts" value={currentRecord.totalAttempts} />
-                {/* <StatsRow label="Total clicks" value={currentRecord.totalClicks} /> */}
+                <StatsRow label="Highscore" value={currentRecord.highscore} />
+                <StatsRow label="Total clicks" value={currentRecord.totalClicks} />
+                <StatsRow label="AVG" value={currentRecord.average.toFixed(2)} />
               </>
             ) : (
               <div className="text-sm">No data. Click!</div>

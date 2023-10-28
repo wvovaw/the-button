@@ -2,11 +2,10 @@ import { createContext, useReducer, useContext, useMemo, type Dispatch, type Pro
 import { useAuth } from "@/hooks/useAuth";
 import { useDebounce, useEffectOnce, useUpdateEffect } from "@/hooks/usehooks-ts";
 
-import { type GameState, type GameActions, gameReducer } from "./GameContext/reducers/gameReducer";
-import { clickAction } from "./GameContext/actions/clickAction";
-import { getRecordAction } from "./GameContext/actions/getRecordAction";
-import { postponeStatsAction } from "./GameContext/actions/postponeStatsAction";
-import { syncRecordAction } from "./GameContext/actions/syncRecordAction";
+import { type GameState, type GameActions, gameReducer } from "./reducers/gameReducer";
+import { clickAction } from "./actions/clickAction";
+import { getRecordAction } from "./actions/getRecordAction";
+import { pushRecordAction } from "./actions/pushRecordAction";
 
 const GameContext = createContext<{ state: GameState; dispatch: Dispatch<GameActions> } | null>(null);
 
@@ -18,11 +17,11 @@ function GameProvider({ children }: PropsWithChildren) {
   const initialState: GameState = {
     stats: {
       counter: 0,
-      resetsCount: 0,
+      highscore: 0,
+      peaks: [],
       totalClicks: 0,
     },
     currentRecord: null,
-    postponedStats: null,
     isUpdating: false,
     errorMessage: "",
     userId,
@@ -34,15 +33,14 @@ function GameProvider({ children }: PropsWithChildren) {
     getRecordAction(dispatch, state);
   });
 
-  // This effect runs every time counter changes
-  useUpdateEffect(() => {
-    postponeStatsAction(dispatch, state);
-  }, [state.stats.counter]);
-
   // This effect runs right after 2000ms user stoped clicking. It pushes postponedStats to the DB
+  /*
+    FIXME: If clicks stoped at the same value as before effect won't run.
+           Changig it to totalClicks fires effect twice because it is being reset after request
+  */
   const debouncedCounter = useDebounce(state.stats.counter, 2000);
   useUpdateEffect(() => {
-    syncRecordAction(dispatch, state);
+    pushRecordAction(dispatch, state);
   }, [debouncedCounter]);
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch]);

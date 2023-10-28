@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { clickAction, useGame } from "../contexts";
+import { clickAction, useGame } from "../contexts/GameContext";
 import useSound from "use-sound";
 import clickInSound from "@/assets/sounds/click-in.mp3";
 import clickOutSound from "@/assets/sounds/click-out.mp3";

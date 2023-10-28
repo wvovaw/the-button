@@ -1,4 +1,4 @@
-import { useGame } from "../contexts";
+import { useGame } from "../contexts/GameContext";
 import { Loader2 } from "lucide-react";
 
 export default function UpdateIndicator() {

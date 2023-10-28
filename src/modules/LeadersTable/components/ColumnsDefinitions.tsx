@@ -8,30 +8,41 @@ const columns: ColumnDef<RecordData>[] = [
     accessorKey: "id",
     header: "id",
     meta: {
-      skeletonClassName: "h-3 w-4",
+      skeletonClassName: "h-2 w-4",
     },
   },
   {
-    accessorKey: "Name",
+    accessorKey: "owner",
+    header: "Name",
     accessorFn: ({ owner }) => {
       return owner.name;
     },
     meta: {
-      skeletonClassName: "h-3 w-18",
+      skeletonClassName: "h-2 w-18",
     },
   },
   {
-    accessorKey: "highScore",
+    accessorKey: "highscore",
     header: "Highscore",
     meta: {
-      skeletonClassName: "h-3 w-8",
+      skeletonClassName: "h-2 w-8",
     },
   },
   {
-    accessorKey: "totalAttempts",
-    header: "Attempts",
+    accessorKey: "average",
+    header: "AVG",
+    cell: ({row}) => {
+      return(row.original.average.toFixed(2));
+    },
     meta: {
-      skeletonClassName: "h-3 w-8",
+      skeletonClassName: "h-2 w-6",
+    }
+  },
+  {
+    accessorKey: "totalClicks",
+    header: "Clicks",
+    meta: {
+      skeletonClassName: "h-2 w-8",
     },
   },
   {
@@ -47,7 +58,7 @@ const columns: ColumnDef<RecordData>[] = [
       );
     },
     meta: {
-      skeletonClassName: "h-3 w-16",
+      skeletonClassName: "h-2 w-16",
     },
   },
   {
@@ -63,7 +74,7 @@ const columns: ColumnDef<RecordData>[] = [
       );
     },
     meta: {
-      skeletonClassName: "h-3 w-16",
+      skeletonClassName: "h-2 w-16",
     },
   },
 ];

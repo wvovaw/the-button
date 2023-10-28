@@ -1,6 +1,12 @@
 import { type PropsWithChildren, createContext, useState, useMemo, useEffect, useCallback } from "react";
 import client from "@/api/client";
-import { type UserProfile } from "@/api/types";
+
+type UserProfile = {
+  id: number;
+  name: string;
+  email: string;
+  accessToken: string;
+};
 
 type SignInFnType = (params: UserProfile, cb: () => void) => void;
 type SignOutFnType = (cb: () => void) => void;
@@ -17,7 +23,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (user) {
-      client.defaults.headers.common["Authorization"] = user.accessToken;
+      client.defaults.headers.common["Authorization"] = `Bearer ${user.accessToken}`;
       localStorage.setItem("user-profile", JSON.stringify(user));
     } else {
       delete client.defaults.headers.common["Authorization"];
