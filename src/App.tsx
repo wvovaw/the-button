@@ -16,8 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<BaseLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route path="signin" element={<LoginPage />} />
+          <Route path="signup" element={<RegisterPage />} />
           <Route path="leaderboard" element={<LeaderboardPage />} />
           <Route path="leaders" element={<Navigate to="/leaderboard" replace />} />
           <Route path="players/:id" element={<PlayerProfilePage />} />

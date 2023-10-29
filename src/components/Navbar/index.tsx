@@ -80,12 +80,12 @@ function UsernameOrLogin({ className }: { className?: string }) {
     return (
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavbarLink to="/login">
+          <NavbarLink to="/signin">
             Sign in
           </NavbarLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavbarButtonLink to="/register">
+          <NavbarButtonLink to="/signup">
             Sign up
           </NavbarButtonLink>
         </NavigationMenuItem>
