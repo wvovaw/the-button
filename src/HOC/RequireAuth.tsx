@@ -6,7 +6,7 @@ export function RequireAuth({ children }: PropsWithChildren) {
   const location = useLocation();
   const authCtx = useAuth();
 
-  if (!authCtx?.user?.accessToken) {
+  if (!authCtx?.isAuthenticated()) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

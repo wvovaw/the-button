@@ -49,15 +49,17 @@ export default function TheButton() {
         text-primary-foreground/70
         transition-all
         duration-200
+        md:duration-150
         [box-shadow:0_12px_0_0_hsl(var(--accent)),0_20px_0_0_hsl(var(--secondary))]
+        md:[box-shadow:0_16px_0_0_hsl(var(--accent)),0_30px_0_0_hsl(var(--secondary))]
         enabled:active:translate-y-2
         enabled:active:border-b-[0px]
         enabled:active:[box-shadow:0_0px_0_0_hsl(var(--accent)),0_0px_0_0_hsl(var(--secondary))]
         disabled:cursor-not-allowed
         disabled:bg-primary/70
         disabled:[box-shadow:0_12px_0_0_hsl(var(--accent)/0.6),0_20px_0_0_hsl(var(--secondary)/0.9)]
-        md:w-[30w]
-        xl:w-[500px]
+        md:disabled:[box-shadow:0_16px_0_0_hsl(var(--accent)),0_30px_0_0_hsl(var(--secondary))]
+        md:w-96
         "
         onClick={handleClick}
         onMouseDown={handleMouseDown}

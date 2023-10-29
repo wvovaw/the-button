@@ -2,11 +2,10 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/NavigationMenu";
-import { NavbarLink } from "./components/Link";
+import { NavbarButtonLink, NavbarLink } from "./components/Link";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -14,11 +13,11 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/DropdownMenu";
-import { ChevronDown, LogOut, SettingsIcon } from "lucide-react";
+import { ChevronDown, LogOut, SettingsIcon, User } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <NavigationMenu className="max-w-full justify-between border-b border-border px-4 py-1">
+    <NavigationMenu className="max-w-full justify-between px-5 py-3">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavbarLink to="/">Home</NavbarLink>
@@ -32,27 +31,34 @@ export default function Navbar() {
           <NavbarLink to="/play">Play</NavbarLink>
         </NavigationMenuItem>
       </NavigationMenuList>
-      <UsernameOrLogin className="" />
+      <UsernameOrLogin />
     </NavigationMenu>
   );
 }
 
-function UsernameOrLogin({ className }: { className: string }) {
+function UsernameOrLogin({ className }: { className?: string }) {
   const authCtx = useAuth();
+  if (!authCtx) throw new Error("AuthContext is not available");
+
   const navigate = useNavigate();
-  if (authCtx?.user?.accessToken)
+
+  if (authCtx.isAuthenticated())
     return (
       <NavigationMenuList className={className}>
         <NavigationMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger className="group my-2 flex items-center text-foreground">
-              <span className="text-base font-normal">{authCtx?.user?.name}</span>
+            <DropdownMenuTrigger className="group my-2 flex items-center">
+              <span className="text-foreground/80 text-base font-semibold select-none">{authCtx.user?.name}</span>
               <ChevronDown
                 className="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
                 aria-hidden="true"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
+            <DropdownMenuContent className="w-56" align="end" alignOffset={5} sideOffset={10}>
+              <DropdownMenuItem disabled className="cursor-pointer">
+                <User className="mr-2 h-4 w-4" />
+                <span>Profile</span>
+              </DropdownMenuItem>
               <DropdownMenuItem disabled className="cursor-pointer">
                 <SettingsIcon className="mr-2 h-4 w-4" />
                 <span>Settings</span>
@@ -67,7 +73,6 @@ function UsernameOrLogin({ className }: { className: string }) {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <NavigationMenuContent></NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
     );
@@ -75,14 +80,14 @@ function UsernameOrLogin({ className }: { className: string }) {
     return (
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavbarLink className="text-foreground" to="/login">
+          <NavbarLink to="/login">
             Sign in
           </NavbarLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavbarLink className="text-primary" to="/register">
+          <NavbarButtonLink to="/register">
             Sign up
-          </NavbarLink>
+          </NavbarButtonLink>
         </NavigationMenuItem>
       </NavigationMenuList>
     );

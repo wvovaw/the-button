@@ -11,11 +11,13 @@ type UserProfile = {
 
 type SignInFnType = (params: UserProfile, cb: () => void) => void;
 type SignOutFnType = (cb: () => void) => void;
+type IsAuthenticated = () => boolean;
 
 type AuthContextType = {
   user: UserProfile | null;
   signIn: SignInFnType;
   signOut: SignOutFnType;
+  isAuthenticated: IsAuthenticated;
 };
 export const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -35,14 +37,16 @@ export function AuthProvider({ children }: PropsWithChildren) {
     setUser(null);
     cb();
   }, []);
+  const isAuthenticated = useCallback(() => (user && user.accessToken ? true : false), [user]);
 
   const value: AuthContextType = useMemo(
     () => ({
       user,
       signIn,
       signOut,
+      isAuthenticated,
     }),
-    [user, signIn, signOut],
+    [user, signIn, signOut, isAuthenticated],
   );
   return <AuthContext.Provider value={value}> {children} </AuthContext.Provider>;
 }

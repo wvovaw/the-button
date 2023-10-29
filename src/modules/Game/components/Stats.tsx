@@ -11,13 +11,13 @@ export default function Stats() {
 
   return (
     <>
-      <div className="inset-x-center top-4 select-none">
-        <div className="flex flex-row gap-5 text-base font-semibold text-muted">
+      <div className="inset-x-center top-12 select-none">
+        <div className="flex flex-row gap-5 font-semibold text-muted">
           <StatsColumn>
             {isUpdating ? (
               <>
                 <StatsRow label="Highscore" value={<Skeleton className="h-2 w-6 bg-accent" />} />
-                <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-6 bg-accent" />} />
+                <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-8 bg-accent" />} />
                 <StatsRow label="AVG" value={<Skeleton className="h-2 w-6 bg-accent" />} />
               </>
             ) : currentRecord ? (
@@ -39,8 +39,8 @@ export default function Stats() {
 function StatsRow({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="grid h-7 w-full grid-cols-2">
-      <div className="flex place-items-center justify-center text-sm font-medium">{label}</div>
-      <div className="flex place-content-center items-center text-center">{value}</div>
+      <div className="flex place-items-center justify-center text-lg font-normal whitespace-nowrap">{label}</div>
+      <div className="flex place-content-center items-center text-center text-lg font-heading">{value}</div>
     </div>
   );
 }

@@ -8,7 +8,7 @@ import { SettingsPopover } from "./components/SettingsPopover";
 
 export default function Game() {
   return (
-    <div className="h-[calc(100vh-80px)] w-full relative">
+    <div className="h-[calc(100vh-85px)] w-full relative">
       <SettingsProvider>
         <SettingsPopover />
         <GameProvider>
