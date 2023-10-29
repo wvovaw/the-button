@@ -1,5 +1,6 @@
-import { type PropsWithChildren, createContext, useState, useMemo, useEffect, useCallback } from "react";
+import { type PropsWithChildren, createContext, useMemo, useCallback, useEffect } from "react";
 import client from "@/api/client";
+import { useLocalStorage } from "@/hooks/usehooks-ts";
 
 type UserProfile = {
   id: number;
@@ -19,20 +20,15 @@ type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-  const [user, setUser] = useState<UserProfile | null>(JSON.parse(localStorage.getItem("user-profile") ?? "null"));
+  const [user, setUser] = useLocalStorage<UserProfile | null>("user-profile", null);
 
   useEffect(() => {
-    if (user) {
-      client.defaults.headers.common["Authorization"] = `Bearer ${user.accessToken}`;
-      localStorage.setItem("user-profile", JSON.stringify(user));
-    } else {
-      delete client.defaults.headers.common["Authorization"];
-      localStorage.removeItem("user-profile");
-    }
+    if (user) client.defaults.headers.common["Authorization"] = `Bearer ${user.accessToken}`;
+    else delete client.defaults.headers.common["Authorization"];
   }, [user]);
 
-  const signIn = useCallback((params: UserProfile, cb: () => void) => {
-    setUser(params);
+  const signIn = useCallback((user: UserProfile, cb: () => void) => {
+    setUser(user);
     cb();
   }, []);
   const signOut = useCallback((cb: () => void) => {
