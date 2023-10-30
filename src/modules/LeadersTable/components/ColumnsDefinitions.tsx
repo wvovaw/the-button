@@ -1,12 +1,14 @@
+/* eslint-disable import/no-duplicates */
 import { ColumnDef } from "@tanstack/react-table";
-
+import formatRelative from "date-fns/formatRelative";
+import en from "date-fns/locale/en-US";
 import { type RecordData } from "@/api/types";
 
 // To add meta fields modify react-table.d.ts file in the root dir of the module
 const columns: ColumnDef<RecordData>[] = [
   {
     accessorKey: "id",
-    header: "id",
+    header: "ID",
     meta: {
       skeletonClassName: "h-2 w-4",
     },
@@ -31,12 +33,12 @@ const columns: ColumnDef<RecordData>[] = [
   {
     accessorKey: "average",
     header: "AVG",
-    cell: ({row}) => {
-      return(row.original.average.toFixed(2));
+    cell: ({ row }) => {
+      return row.original.average.toFixed(2);
     },
     meta: {
       skeletonClassName: "h-2 w-6",
-    }
+    },
   },
   {
     accessorKey: "totalClicks",
@@ -46,30 +48,15 @@ const columns: ColumnDef<RecordData>[] = [
     },
   },
   {
-    accessorKey: "createdAt",
-    header: "Created",
-    cell: ({ row }) => {
-      return (
-        <span>
-          {Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(
-            Date.parse(row.original.createdAt),
-          )}
-        </span>
-      );
-    },
-    meta: {
-      skeletonClassName: "h-2 w-16",
-    },
-  },
-  {
     accessorKey: "updatedAt",
     header: "Last update",
     cell: ({ row }) => {
       return (
         <span>
-          {Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(
-            Date.parse(row.original.updatedAt),
-          )}
+          {formatRelative(Date.parse(row.original.updatedAt), Date.now(), {
+            locale: en,
+            weekStartsOn: 1,
+          })}
         </span>
       );
     },
@@ -77,6 +64,22 @@ const columns: ColumnDef<RecordData>[] = [
       skeletonClassName: "h-2 w-16",
     },
   },
+  // {
+  //   accessorKey: "createdAt",
+  //   header: "Created",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <span>
+  //         {Intl.DateTimeFormat("ru-RU", { dateStyle: "short", timeStyle: "short" }).format(
+  //           Date.parse(row.original.createdAt),
+  //         )}
+  //       </span>
+  //     );
+  //   },
+  //   meta: {
+  //     skeletonClassName: "h-2 w-16",
+  //   },
+  // },
 ];
 
 export default columns;

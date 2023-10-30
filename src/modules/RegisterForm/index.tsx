@@ -37,7 +37,7 @@ export function RegisterForm() {
         name,
         password,
       });
-      navigate("/login");
+      navigate("/signin");
     } catch (e: unknown) {
       setIsLoading(false);
       setRegisterError(true);
