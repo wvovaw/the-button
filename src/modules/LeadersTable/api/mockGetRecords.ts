@@ -16,9 +16,10 @@ const newRecord = (): RecordData => {
   return {
     createdAt: faker.date.between({ from: "2023-10-01T00:00:00.000Z", to: "2023-10-20T00:00:00.000Z" }).toISOString(),
     updatedAt: faker.date.between({ from: "2023-10-01T00:00:00.000Z", to: "2023-10-20T00:00:00.000Z" }).toISOString(),
-    highScore: faker.number.int({ min: 1, max: 44 }),
-    totalAttempts: faker.number.int({ min: 60, max: 860 }),
-    updatedTimes: faker.number.int({ max: 36 }),
+    highscore: faker.number.int({ min: 1, max: 44 }),
+    average: faker.number.float({ min: 8, max: 14 }),
+    totalClicks: faker.number.int({min: 653, max: 12983 }),
+    totalResets: faker.number.int({ min: 82, max: 1698 }),
     id: recordId++,
     owner: {
       id: userId++,

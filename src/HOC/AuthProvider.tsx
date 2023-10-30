@@ -2,7 +2,7 @@ import { type PropsWithChildren, createContext, useMemo, useCallback, useEffect 
 import client from "@/api/client";
 import { useLocalStorage } from "@/hooks/usehooks-ts";
 
-type UserProfile = {
+export type UserProfile = {
   id: number;
   name: string;
   email: string;

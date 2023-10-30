@@ -9,7 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { signIn } from "@/api/services/signin";
-import { UserProfile } from "@/api/types";
+import { UserProfile } from "@/HOC/AuthProvider";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";

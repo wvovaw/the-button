@@ -6,6 +6,8 @@ import {
   ToastTitle,
   ToastViewport,
   ToastAction,
+  ToastActionElement,
+  ToastProps,
 } from "@/components/ui/Toaster/Toast";
 import { useToast } from "@/components/ui/Toaster/useToast";
 
@@ -31,4 +33,4 @@ function Toaster() {
   );
 }
 
-export { Toaster, ToastAction, useToast };
+export { Toaster, ToastAction, useToast, type ToastActionElement, type ToastProps };
