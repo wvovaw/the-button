@@ -45,3 +45,8 @@ export type RecordsPaginatedResponseData = {
     itemsCount: number;
   };
 };
+export type StatisticsResponseData = {
+  totalClicks: number;
+  playersCount: number;
+  avgHighscore: number;
+}

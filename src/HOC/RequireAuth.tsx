@@ -7,7 +7,7 @@ export function RequireAuth({ children }: PropsWithChildren) {
   const authCtx = useAuth();
 
   if (!authCtx?.isAuthenticated()) {
-    return <Navigate to="/login" state={{ from: location }} />;
+    return <Navigate to="/signin" state={{ from: location }} />;
   }
 
   return children;
