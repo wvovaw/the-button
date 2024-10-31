@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 import { createRecord, deleteRecord, getRecordByOwnerId, getRecords, updateRecord } from './record.services'

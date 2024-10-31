@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Prisma } from '@prisma/client'
 import prisma from '../../utils/prisma'
 import { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'

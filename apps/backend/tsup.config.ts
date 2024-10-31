@@ -1,9 +1,9 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ["src/app.ts"],
+  entry: ['src/app.ts'],
   splitting: false,
   sourcemap: true,
   clean: true,
-  target: "node19",
-});
+  target: 'node19',
+})

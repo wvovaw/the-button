@@ -40,9 +40,12 @@ async function recordRoutes(server: FastifyInstance) {
       preHandler: [server.authenticate, validSignature],
       schema: {
         headers: {
-          'X-Signature': {
-            type: 'string',
-            description: 'Body data signed by secret key',
+          type: 'object',
+          required: ['X-Signature'],
+          properties: {
+            'X-Signature': {
+              type: 'string',
+            },
           },
         },
         body: {
@@ -94,9 +97,12 @@ async function recordRoutes(server: FastifyInstance) {
       preHandler: [server.authenticate, validSignature],
       schema: {
         headers: {
-          'X-Signature': {
-            type: 'string',
-            description: 'Body data signed by secret key',
+          type: 'object',
+          required: ['X-Signature'],
+          properties: {
+            'X-Signature': {
+              type: 'string',
+            },
           },
         },
         body: {

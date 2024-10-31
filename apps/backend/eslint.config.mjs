@@ -1,15 +1,22 @@
-{
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"prettier"
-	],
-	"parser": "@typescript-eslint/parser",
-	"plugins": ["@typescript-eslint"],
-	"parserOptions": {
-		"project": "./tsconfig.json"
+// @ts-check
+
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import prerttier from 'eslint-plugin-prettier/recommended'
+export default tseslint.config(
+	prerttier,
+  eslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+	{
+		languageOptions: {
+			parserOptions: {
+				projectService: true,
+				tsconfigRootDir: import.meta.dirname
+			}
+		}
 	},
-	"rules": {
+	{
+		rules: {
 		"@typescript-eslint/no-unsafe-return": "warn",
 		"@typescript-eslint/no-unsafe-assignment": "off",
 		"@typescript-eslint/restrict-template-expressions": "warn",
@@ -37,5 +44,6 @@
 			}
 		],
 		"new-cap": "warn"
+		}
 	}
-}
+);

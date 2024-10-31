@@ -17,6 +17,10 @@ const updateRecordBodySchema = z.object({
 })
 export type UpdateRecordInput = z.infer<typeof updateRecordBodySchema>
 
+const genericHeadersSchema = z.object({
+  'X-Signature': z.string(),
+})
+
 const recordResponseSchema = z.object({
   id: z.number(),
   highscore: z.number(),
@@ -59,6 +63,7 @@ export const { schemas: recordSchemas, $ref } = buildJsonSchemas(
     getRecordByOwnerIdParamsSchema,
     recordResponseSchema,
     recordsResponseSchema,
+    genericHeadersSchema,
   },
   {
     $id: 'Record',

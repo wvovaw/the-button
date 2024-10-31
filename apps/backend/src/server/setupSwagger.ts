@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyReplyContext, FastifyRequest } from 'fastify'
 import swagger from '@fastify/swagger'
-import swaggerUi from '@fastify/swagger-ui'
+import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { withRefResolver } from 'fastify-zod'
 import { version } from '../../package.json'
 
@@ -29,7 +29,9 @@ export default function (server: FastifyInstance) {
       },
     }),
   )
-  server.register(swaggerUi, {
+  // @ts-ignore
+  // i don't know why but this fastify-swager-ui plugin is kind of incompatible with this register method. But it still works
+  server.register(fastifySwaggerUi, {
     prefix: '/docs',
     uiConfig: {
       docExpansion: 'list',
