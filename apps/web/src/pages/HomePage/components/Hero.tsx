@@ -9,7 +9,7 @@ export function Hero() {
   if (!authCtx) throw new Error('AuthProvider is not available')
 
   return (
-    <section className="mx-auto flex flex-col justify-center pt-4 font-body sm:px-6 sm:py-12 lg:flex-row lg:justify-between  lg:py-24">
+    <section className="mx-auto flex flex-col justify-center pt-4 font-body sm:px-6 sm:py-12 lg:flex-row lg:justify-between lg:py-24">
       <div className="flex flex-col justify-center rounded-sm text-center sm:p-6 lg:max-w-md lg:text-left xl:max-w-lg">
         <h1 className="font-heading text-5xl font-bold sm:text-6xl">
           The <span className="text-primary">Button</span>

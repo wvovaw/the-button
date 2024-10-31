@@ -27,8 +27,7 @@ function RowSkeleton<TData>({ columnDefs }: RowSkeletonProps<TData>) {
     <TableRow className="hover:bg-inherit">
       {columnDefs.map((col, ix) => (
         <TableCell key={ix}>
-          <Skeleton
-          className={cn(col.meta?.skeletonClassName)} />
+          <Skeleton className={cn(col.meta?.skeletonClassName)} />
         </TableCell>
       ))}
     </TableRow>
