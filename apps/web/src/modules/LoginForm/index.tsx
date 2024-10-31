@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
-import jwtDecode from 'jwt-decode'
+import {jwtDecode} from 'jwt-decode'
 import { loginSchema } from './schema'
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'

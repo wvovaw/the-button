@@ -24,15 +24,14 @@ function DataTableSkeleton<TData>({ columnDefs }: DataTableSkeletonProps<TData>)
 
 function RowSkeleton<TData>({ columnDefs }: RowSkeletonProps<TData>) {
   return (
-    <>
-      <TableRow className="hover:bg-inherit">
-        {columnDefs.map((col) => (
-          <TableCell key={col.id}>
-            <Skeleton className={cn(col.meta?.skeletonClassName)} />
-          </TableCell>
-        ))}
-      </TableRow>
-    </>
+    <TableRow className="hover:bg-inherit">
+      {columnDefs.map((col, ix) => (
+        <TableCell key={ix}>
+          <Skeleton
+          className={cn(col.meta?.skeletonClassName)} />
+        </TableCell>
+      ))}
+    </TableRow>
   )
 }
 
