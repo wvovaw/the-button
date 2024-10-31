@@ -12,5 +12,5 @@
     "compose:up": "podman-compose -f docker-compose.dev.yml up -d",
     "compose:down": "podman-compose -f docker-compose.dev.yml down"
   },
-  "packageManager": "pnpm@9.10.0"
+  "packageManager": "pnpm@9.12.3"
 }
