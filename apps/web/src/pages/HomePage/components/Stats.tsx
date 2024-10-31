@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { StatisticsResponseData } from "@/api/types";
-import { getStatistics } from "@/api/services/getStatistics";
-import { useEffectOnce } from "@/hooks/usehooks-ts";
-import { shorthandNumber } from "@/lib/utils";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/Tooltip";
+import { useState } from 'react'
+import { StatisticsResponseData } from '@/api/types'
+import { getStatistics } from '@/api/services/getStatistics'
+import { useEffectOnce } from '@/hooks/usehooks-ts'
+import { shorthandNumber } from '@/lib/utils'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip'
 
 export function Stats() {
-  const [stats, setStats] = useState<StatisticsResponseData | null>(null);
+  const [stats, setStats] = useState<StatisticsResponseData | null>(null)
 
   useEffectOnce(() => {
-    (async function () {
-      const statistics = await getStatistics();
-      setStats(statistics);
-    })();
-  });
+    ;(async function () {
+      const statistics = await getStatistics()
+      setStats(statistics)
+    })()
+  })
 
   return (
     <section className="mx-auto grid grid-cols-3 justify-center text-center">
@@ -21,10 +21,10 @@ export function Stats() {
       <StatItem label="Total Clicks" val={stats?.totalClicks ?? 0} />
       <StatItem label="Average Highscore" val={stats?.avgHighscore ?? 0} />
     </section>
-  );
+  )
 }
 
-function StatItem({ label, val }: {label: string, val: number }) {
+function StatItem({ label, val }: { label: string; val: number }) {
   return (
     <TooltipProvider>
       <Tooltip>
@@ -34,10 +34,8 @@ function StatItem({ label, val }: {label: string, val: number }) {
             <p className="text-sm sm:text-base">{label}</p>
           </div>
         </TooltipTrigger>
-        <TooltipContent>
-          {val}
-        </TooltipContent>
+        <TooltipContent>{val}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  );
+  )
 }

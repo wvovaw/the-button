@@ -1,12 +1,12 @@
-import { LoginForm } from "@/modules/LoginForm";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { LoginForm } from '@/modules/LoginForm'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 
 export function LoginPage() {
   return (
     <>
       <LoginCard />
     </>
-  );
+  )
 }
 
 function LoginCard() {
@@ -21,5 +21,5 @@ function LoginCard() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

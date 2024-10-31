@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
 function PlayerProfilePage() {
-  const { id } = useParams();
+  const { id } = useParams()
   return (
     <>
       <h1>Player({id}) profile</h1>
     </>
-  );
+  )
 }
 
-export { PlayerProfilePage };
+export { PlayerProfilePage }

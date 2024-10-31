@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/Button";
-import { Stats } from "./Stats";
-import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
+import { Button } from '@/components/ui/Button'
+import { Stats } from './Stats'
+import { Link } from 'react-router-dom'
+import { ArrowRight } from 'lucide-react'
+import { useAuth } from '@/hooks/useAuth'
 
 export function Hero() {
-  const authCtx = useAuth();
-  if (!authCtx) throw new Error("AuthProvider is not available");
+  const authCtx = useAuth()
+  if (!authCtx) throw new Error('AuthProvider is not available')
 
   return (
     <section className="mx-auto flex flex-col justify-center pt-4 font-body sm:px-6 sm:py-12 lg:flex-row lg:justify-between  lg:py-24">
@@ -43,5 +43,5 @@ export function Hero() {
         <Stats />
       </div>
     </section>
-  );
+  )
 }

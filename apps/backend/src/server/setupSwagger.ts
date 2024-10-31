@@ -1,8 +1,8 @@
-import { FastifyInstance } from "fastify";
-import swagger from "@fastify/swagger";
-import swaggerUi from "@fastify/swagger-ui";
-import { withRefResolver } from "fastify-zod";
-import { version } from "../../package.json";
+import { FastifyInstance, FastifyReplyContext, FastifyRequest } from 'fastify'
+import swagger from '@fastify/swagger'
+import swaggerUi from '@fastify/swagger-ui'
+import { withRefResolver } from 'fastify-zod'
+import { version } from '../../package.json'
 
 export default function (server: FastifyInstance) {
   server.register(
@@ -10,15 +10,15 @@ export default function (server: FastifyInstance) {
     withRefResolver({
       swagger: {
         info: {
-          title: "The Button clone API ",
-          description: "The Button clone game API docs",
+          title: 'The Button clone API ',
+          description: 'The Button clone game API docs',
           version,
         },
         securityDefinitions: {
           apiKey: {
-            type: "apiKey",
-            name: "Authorization",
-            in: "header",
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
           },
         },
         security: [
@@ -28,26 +28,24 @@ export default function (server: FastifyInstance) {
         ],
       },
     }),
-  );
+  )
   server.register(swaggerUi, {
-    prefix: "/docs",
+    prefix: '/docs',
     uiConfig: {
-      docExpansion: "list",
+      docExpansion: 'list',
       deepLinking: false,
     },
     uiHooks: {
-      onRequest: function (request, reply, next) {
-        next();
+      onRequest: function (request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
+        next()
       },
-      preHandler: function (request, reply, next) {
-        next();
+      preHandler: function (request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
+        next()
       },
     },
     staticCSP: true,
-    transformStaticCSP: (header) => header,
-    transformSpecification: (swaggerObject) => {
-      return swaggerObject;
-    },
+    transformStaticCSP: (header: unknown) => header,
+    transformSpecification: (swaggerObject: unknown) => swaggerObject,
     transformSpecificationClone: true,
-  });
+  })
 }

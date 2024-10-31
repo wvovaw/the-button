@@ -1,4 +1,4 @@
-import statisticsRouter from "./statistics.routes";
-import { statisticsSchemas } from "./statistics.schemas";
+import statisticsRouter from './statistics.routes'
+import { statisticsSchemas } from './statistics.schemas'
 
-export { statisticsRouter, statisticsSchemas };
+export { statisticsRouter, statisticsSchemas }

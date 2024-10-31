@@ -1,19 +1,15 @@
-import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-} from "@/components/ui/NavigationMenu";
-import { NavbarButtonLink, NavbarLink } from "./components/Link";
+import { useAuth } from '@/hooks/useAuth'
+import { useNavigate } from 'react-router-dom'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/NavigationMenu'
+import { NavbarButtonLink, NavbarLink } from './components/Link'
 import {
   DropdownMenu,
   DropdownMenuItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from "@/components/ui/DropdownMenu";
-import { ChevronDown, LogOut, SettingsIcon, User } from "lucide-react";
+} from '@/components/ui/DropdownMenu'
+import { ChevronDown, LogOut, SettingsIcon, User } from 'lucide-react'
 
 export default function Navbar() {
   return (
@@ -33,14 +29,14 @@ export default function Navbar() {
       </NavigationMenuList>
       <UsernameOrLogin />
     </NavigationMenu>
-  );
+  )
 }
 
 function UsernameOrLogin({ className }: { className?: string }) {
-  const authCtx = useAuth();
-  if (!authCtx) throw new Error("AuthContext is not available");
+  const authCtx = useAuth()
+  if (!authCtx) throw new Error('AuthContext is not available')
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   if (authCtx.isAuthenticated())
     return (
@@ -48,7 +44,7 @@ function UsernameOrLogin({ className }: { className?: string }) {
         <NavigationMenuItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="group my-2 flex items-center">
-              <span className="text-foreground/80 text-base font-semibold select-none">{authCtx.user?.name}</span>
+              <span className="select-none text-base font-semibold text-foreground/80">{authCtx.user?.name}</span>
               <ChevronDown
                 className="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
                 aria-hidden="true"
@@ -66,7 +62,7 @@ function UsernameOrLogin({ className }: { className?: string }) {
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="cursor-pointer"
-                onClick={() => authCtx.signOut(() => navigate("/", { replace: true }))}
+                onClick={() => authCtx.signOut(() => navigate('/', { replace: true }))}
               >
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Logout</span>
@@ -75,20 +71,16 @@ function UsernameOrLogin({ className }: { className?: string }) {
           </DropdownMenu>
         </NavigationMenuItem>
       </NavigationMenuList>
-    );
+    )
   else
     return (
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavbarLink to="/signin">
-            Sign in
-          </NavbarLink>
+          <NavbarLink to="/signin">Sign in</NavbarLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavbarButtonLink to="/signup">
-            Sign up
-          </NavbarButtonLink>
+          <NavbarButtonLink to="/signup">Sign up</NavbarButtonLink>
         </NavigationMenuItem>
       </NavigationMenuList>
-    );
+    )
 }

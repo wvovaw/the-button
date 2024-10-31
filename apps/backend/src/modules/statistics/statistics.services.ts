@@ -1,5 +1,5 @@
-import { type Statistics } from "./statistics.schemas";
-import prisma from "../../utils/prisma";
+import { type Statistics } from './statistics.schemas'
+import prisma from '../../utils/prisma'
 
 export async function getStatistics(): Promise<Statistics> {
   const stats = await prisma.record.aggregate({
@@ -12,15 +12,15 @@ export async function getStatistics(): Promise<Statistics> {
     _count: {
       ownerId: true,
     },
-  });
+  })
 
-  const avgHighscore = stats._avg.highscore ?? 0;
-  const playersCount = stats._count.ownerId;
-  const totalClicks = stats._sum.totalClicks ?? 0;
+  const avgHighscore = stats._avg.highscore ?? 0
+  const playersCount = stats._count.ownerId
+  const totalClicks = stats._sum.totalClicks ?? 0
 
   return {
     avgHighscore,
     playersCount,
     totalClicks,
-  };
+  }
 }

@@ -1,47 +1,47 @@
-import { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/Form";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Loader2 } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Loader2 } from 'lucide-react'
 
-import { registerSchema } from "./schema";
-import { signUp } from "@/api/services/signup";
+import { registerSchema } from './schema'
+import { signUp } from '@/api/services/signup'
 
 export function RegisterForm() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      email: "",
-      password: "",
-      name: "",
-      confirm: "",
+      email: '',
+      password: '',
+      name: '',
+      confirm: '',
     },
-  });
+  })
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [registerError, setRegisterError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [registerError, setRegisterError] = useState(false)
 
   async function onSubmit({ email, name, password }: z.infer<typeof registerSchema>) {
     try {
-      setIsLoading(true);
-      setRegisterError(false);
+      setIsLoading(true)
+      setRegisterError(false)
       await signUp({
         email,
         name,
         password,
-      });
-      navigate("/signin");
+      })
+      navigate('/signin')
     } catch (e: unknown) {
-      setIsLoading(false);
-      setRegisterError(true);
-      console.log("Login failed: ", e);
+      setIsLoading(false)
+      setRegisterError(true)
+      console.log('Login failed: ', e)
     }
   }
 
@@ -109,5 +109,5 @@ export function RegisterForm() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

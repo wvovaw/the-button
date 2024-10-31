@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -62,10 +62,10 @@
 
 @layer utilities {
   .inset-x-center {
-    @apply absolute left-1/2 transform -translate-x-1/2;
+    @apply absolute left-1/2 -translate-x-1/2 transform;
   }
   .inset-y-center {
-    @apply absolute top-1/2 transform -translate-y-1/2;
+    @apply absolute top-1/2 -translate-y-1/2 transform;
   }
   .inset-center {
     @apply inset-x-center inset-y-center;

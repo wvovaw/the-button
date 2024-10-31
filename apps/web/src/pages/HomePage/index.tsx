@@ -1,12 +1,11 @@
-import { Hero } from "./components/Hero";
+import { Hero } from './components/Hero'
 
 function HomePage() {
-
   return (
     <>
       <Hero />
     </>
-  );
+  )
 }
 
-export { HomePage };
+export { HomePage }

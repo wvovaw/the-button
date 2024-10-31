@@ -8,11 +8,11 @@ import {
   ToastAction,
   ToastActionElement,
   ToastProps,
-} from "@/components/ui/Toaster/Toast";
-import { useToast } from "@/components/ui/Toaster/useToast";
+} from '@/components/ui/Toaster/Toast'
+import { useToast } from '@/components/ui/Toaster/useToast'
 
 function Toaster() {
-  const { toasts } = useToast();
+  const { toasts } = useToast()
 
   return (
     <ToastProvider>
@@ -26,11 +26,11 @@ function Toaster() {
             {action}
             <ToastClose />
           </Toast>
-        );
+        )
       })}
       <ToastViewport />
     </ToastProvider>
-  );
+  )
 }
 
-export { Toaster, ToastAction, useToast, type ToastActionElement, type ToastProps };
+export { Toaster, ToastAction, useToast, type ToastActionElement, type ToastProps }

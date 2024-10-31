@@ -1,9 +1,9 @@
-import LeadersTable from "@/modules/LeadersTable";
+import LeadersTable from '@/modules/LeadersTable'
 
 export function LeaderboardPage() {
   return (
     <>
       <LeadersTable />
     </>
-  );
+  )
 }

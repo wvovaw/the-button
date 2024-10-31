@@ -1,12 +1,12 @@
-import { RegisterForm } from "@/modules/RegisterForm";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { RegisterForm } from '@/modules/RegisterForm'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 
 export function RegisterPage() {
   return (
     <>
       <RegisterCard />
     </>
-  );
+  )
 }
 
 function RegisterCard() {
@@ -21,5 +21,5 @@ function RegisterCard() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

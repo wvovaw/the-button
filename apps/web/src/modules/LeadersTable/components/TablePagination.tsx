@@ -1,12 +1,12 @@
-import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/Select";
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select'
 
-import { type Table } from "@tanstack/react-table";
-import TABLE_CONFING from "../constants";
+import { type Table } from '@tanstack/react-table'
+import TABLE_CONFING from '../constants'
 
 interface TablePaginationProps<TData> {
-  table: Table<TData>;
+  table: Table<TData>
 }
 
 export default function TablePagination<TData>({ table }: TablePaginationProps<TData>) {
@@ -69,5 +69,5 @@ export default function TablePagination<TData>({ table }: TablePaginationProps<T
         </Button>
       </div>
     </div>
-  );
+  )
 }

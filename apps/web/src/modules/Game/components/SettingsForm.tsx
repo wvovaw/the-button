@@ -1,13 +1,13 @@
-import { Label } from "@/components/ui/Label";
-import { Switch } from "@/components/ui/Switch";
-import { useSettings } from "../contexts/SettingsContext";
-import { toggleSoundAction } from "../contexts/SettingsContext/actions/toggleSoundAction";
+import { Label } from '@/components/ui/Label'
+import { Switch } from '@/components/ui/Switch'
+import { useSettings } from '../contexts/SettingsContext'
+import { toggleSoundAction } from '../contexts/SettingsContext/actions/toggleSoundAction'
 
 export function SettingsForm() {
-  const settings = useSettings();
-  if (!settings) throw new Error("Settings context isn't available");
+  const settings = useSettings()
+  if (!settings) throw new Error("Settings context isn't available")
 
-  const { state, dispatch } = settings;
+  const { state, dispatch } = settings
 
   return (
     <div className="grid gap-4">
@@ -27,5 +27,5 @@ export function SettingsForm() {
         </div>
       </div>
     </div>
-  );
+  )
 }

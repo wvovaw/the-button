@@ -7,12 +7,12 @@ export function NotFoundPage() {
         <p className="mt-4 text-muted-foreground">Page not found</p>
       </div>
     </>
-  );
+  )
 }
 
 interface DoddleProps {
-  width?: number;
-  height?: number;
+  width?: number
+  height?: number
 }
 function Doodle({ width = 512, height = 428 }: DoddleProps) {
   return (
@@ -37,5 +37,5 @@ function Doodle({ width = 512, height = 428 }: DoddleProps) {
         </g>
       </g>
     </svg>
-  );
+  )
 }

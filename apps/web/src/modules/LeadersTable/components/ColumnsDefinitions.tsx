@@ -1,55 +1,55 @@
 /* eslint-disable import/no-duplicates */
-import { ColumnDef } from "@tanstack/react-table";
-import formatRelative from "date-fns/formatRelative";
-import en from "date-fns/locale/en-US";
-import { type RecordData } from "@/api/types";
+import { ColumnDef } from '@tanstack/react-table'
+import formatRelative from 'date-fns/formatRelative'
+import en from 'date-fns/locale/en-US'
+import { type RecordData } from '@/api/types'
 
 // To add meta fields modify react-table.d.ts file in the root dir of the module
 const columns: ColumnDef<RecordData>[] = [
   {
-    accessorKey: "id",
-    header: "ID",
+    accessorKey: 'id',
+    header: 'ID',
     meta: {
-      skeletonClassName: "h-2 w-4",
+      skeletonClassName: 'h-2 w-4',
     },
   },
   {
-    accessorKey: "owner",
-    header: "Name",
+    accessorKey: 'owner',
+    header: 'Name',
     accessorFn: ({ owner }) => {
-      return owner.name;
+      return owner.name
     },
     meta: {
-      skeletonClassName: "h-2 w-18",
+      skeletonClassName: 'h-2 w-18',
     },
   },
   {
-    accessorKey: "highscore",
-    header: "Highscore",
+    accessorKey: 'highscore',
+    header: 'Highscore',
     meta: {
-      skeletonClassName: "h-2 w-8",
+      skeletonClassName: 'h-2 w-8',
     },
   },
   {
-    accessorKey: "average",
-    header: "AVG",
+    accessorKey: 'average',
+    header: 'AVG',
     cell: ({ row }) => {
-      return row.original.average.toFixed(2);
+      return row.original.average.toFixed(2)
     },
     meta: {
-      skeletonClassName: "h-2 w-6",
+      skeletonClassName: 'h-2 w-6',
     },
   },
   {
-    accessorKey: "totalClicks",
-    header: "Clicks",
+    accessorKey: 'totalClicks',
+    header: 'Clicks',
     meta: {
-      skeletonClassName: "h-2 w-8",
+      skeletonClassName: 'h-2 w-8',
     },
   },
   {
-    accessorKey: "updatedAt",
-    header: "Last update",
+    accessorKey: 'updatedAt',
+    header: 'Last update',
     cell: ({ row }) => {
       return (
         <span>
@@ -58,10 +58,10 @@ const columns: ColumnDef<RecordData>[] = [
             weekStartsOn: 1,
           })}
         </span>
-      );
+      )
     },
     meta: {
-      skeletonClassName: "h-2 w-16",
+      skeletonClassName: 'h-2 w-16',
     },
   },
   // {
@@ -80,6 +80,6 @@ const columns: ColumnDef<RecordData>[] = [
   //     skeletonClassName: "h-2 w-16",
   //   },
   // },
-];
+]
 
-export default columns;
+export default columns

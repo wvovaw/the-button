@@ -1,5 +1,5 @@
-import NodeCache from "node-cache";
+import NodeCache from 'node-cache'
 
-const cache = new NodeCache();
+const cache = new NodeCache()
 
-export default cache;
+export default cache

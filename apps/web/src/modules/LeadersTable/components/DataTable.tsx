@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState } from 'react'
 import {
   ColumnDef,
   flexRender,
@@ -7,17 +7,17 @@ import {
   getSortedRowModel,
   SortingState,
   PaginationState,
-} from "@tanstack/react-table";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/Table";
-import TablePagination from "./TablePagination";
-import { DataTableSkeleton } from "./DataTableSkeleton";
+} from '@tanstack/react-table'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table'
+import TablePagination from './TablePagination'
+import { DataTableSkeleton } from './DataTableSkeleton'
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  rowsCount: number;
-  pagination: PaginationState;
-  onPaginationChange: (updOrVal: PaginationState | ((old: PaginationState) => PaginationState)) => void;
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+  rowsCount: number
+  pagination: PaginationState
+  onPaginationChange: (updOrVal: PaginationState | ((old: PaginationState) => PaginationState)) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -27,8 +27,8 @@ export function DataTable<TData, TValue>({
   pagination,
   onPaginationChange,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const paginationCached = useMemo(() => ({ ...pagination }), [pagination]);
+  const [sorting, setSorting] = useState<SortingState>([])
+  const paginationCached = useMemo(() => ({ ...pagination }), [pagination])
 
   const table = useReactTable({
     data,
@@ -43,7 +43,7 @@ export function DataTable<TData, TValue>({
       sorting,
       pagination: paginationCached,
     },
-  });
+  })
 
   return (
     <>
@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -65,7 +65,11 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"} className="hover:bg-inherit font-semibold">
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                  className="font-semibold hover:bg-inherit"
+                >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
@@ -79,5 +83,5 @@ export function DataTable<TData, TValue>({
       </div>
       <TablePagination table={table} />
     </>
-  );
+  )
 }

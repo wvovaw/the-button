@@ -1,18 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { Prisma } from "@prisma/client";
-import prisma from "../../utils/prisma";
-import {
-  CreateRecordInput,
-  GetRecordByOwnderIdInput,
-  GetRecordsInput,
-  UpdateRecordInput,
-} from "./record.schemas";
+import { Prisma } from '@prisma/client'
+import prisma from '../../utils/prisma'
+import { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 
-export async function createRecord(
-  data: CreateRecordInput & { ownerId: number },
-) {
+export async function createRecord(data: CreateRecordInput & { ownerId: number }) {
   try {
-    type RecordCreateData = Parameters<typeof prisma.record.create>[0]["data"];
+    type RecordCreateData = Parameters<typeof prisma.record.create>[0]['data']
     const record: RecordCreateData = {
       ownerId: data.ownerId,
       average: 0,
@@ -20,14 +13,14 @@ export async function createRecord(
       totalClicks: 0,
       totalResets: 0,
       highscore: 0,
-    };
-    if (data.highscore) record.highscore = data.highscore;
-    if (data.clicks) record.totalClicks = data.clicks;
+    }
+    if (data.highscore) record.highscore = data.highscore
+    if (data.clicks) record.totalClicks = data.clicks
     if (data.peaks) {
-      const weight = data.peaks.length;
-      record.average = data.peaks.reduce((acc, cur) => acc + cur) / weight;
-      record.averageWeight = weight;
-      record.totalResets = weight;
+      const weight = data.peaks.length
+      record.average = data.peaks.reduce((acc, cur) => acc + cur) / weight
+      record.averageWeight = weight
+      record.totalResets = weight
     }
 
     return await prisma.record.create({
@@ -35,29 +28,24 @@ export async function createRecord(
       include: {
         owner: true,
       },
-    });
+    })
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2002")
-        throw new Error(
-          `The user with id ${data.ownerId} already has a Record associated with it`,
-          {
-            cause: 409,
-          },
-        );
-    } else throw e;
+      if (e.code === 'P2002')
+        throw new Error(`The user with id ${data.ownerId} already has a Record associated with it`, {
+          cause: 409,
+        })
+    } else throw e
   }
 }
 
-export async function updateRecord(
-  data: UpdateRecordInput & { ownerId: number },
-) {
+export async function updateRecord(data: UpdateRecordInput & { ownerId: number }) {
   try {
-    type RecordUpdateData = Parameters<typeof prisma.record.update>[0]["data"];
-    const record: RecordUpdateData = {};
+    type RecordUpdateData = Parameters<typeof prisma.record.update>[0]['data']
+    const record: RecordUpdateData = {}
 
-    if (data.clicks) record.totalClicks = { increment: data.clicks };
-    if (data.highscore) record.highscore = data.highscore;
+    if (data.clicks) record.totalClicks = { increment: data.clicks }
+    if (data.highscore) record.highscore = data.highscore
     if (data.peaks) {
       const currentAverage = await prisma.record.findUnique({
         where: {
@@ -67,22 +55,22 @@ export async function updateRecord(
           average: true,
           averageWeight: true,
         },
-      });
+      })
       const { average, averageWeight } = currentAverage ?? {
         average: 0,
         averageWeight: 0,
-      };
+      }
 
-      const w1 = averageWeight;
-      const X1 = average * averageWeight;
+      const w1 = averageWeight
+      const X1 = average * averageWeight
 
-      const X2 = data.peaks.reduce((acc, cur) => acc + cur);
-      const w2 = data.peaks.length;
+      const X2 = data.peaks.reduce((acc, cur) => acc + cur)
+      const w2 = data.peaks.length
 
-      record.average = (X1 + X2) / (w1 + w2);
-      record.averageWeight = w1 + w2;
+      record.average = (X1 + X2) / (w1 + w2)
+      record.averageWeight = w1 + w2
 
-      record.totalResets = { increment: data.peaks.length };
+      record.totalResets = { increment: data.peaks.length }
     }
 
     return await prisma.record.update({
@@ -93,17 +81,14 @@ export async function updateRecord(
       include: {
         owner: true,
       },
-    });
+    })
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2002")
-        throw new Error(
-          `The user with id ${data.ownerId} doesn not have a Record associated with them`,
-          {
-            cause: 404,
-          },
-        );
-    } else throw e;
+      if (e.code === 'P2002')
+        throw new Error(`The user with id ${data.ownerId} doesn not have a Record associated with them`, {
+          cause: 404,
+        })
+    } else throw e
   }
 }
 
@@ -113,21 +98,21 @@ export async function deleteRecord(ownerId: number) {
       where: {
         ownerId,
       },
-    });
+    })
   } catch (e: unknown) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2025")
+      if (e.code === 'P2025')
         throw new Error(`Record not found.`, {
           cause: 404,
-        });
+        })
     }
   }
 }
 
 export async function getRecords(data: GetRecordsInput) {
-  const page = data.page ?? 0;
-  const perPage = data.perPage ?? 25;
-  const offset = page * perPage;
+  const page = data.page ?? 0
+  const perPage = data.perPage ?? 25
+  const offset = page * perPage
 
   const [items, itemsCount] = await prisma.$transaction([
     prisma.record.findMany({
@@ -148,10 +133,10 @@ export async function getRecords(data: GetRecordsInput) {
         createdAt: true,
         updatedAt: true,
       },
-      orderBy: [{ highscore: "desc" }, { totalResets: "asc" }],
+      orderBy: [{ highscore: 'desc' }, { totalResets: 'asc' }],
     }),
     prisma.record.count(),
-  ]);
+  ])
 
   return {
     data: items,
@@ -160,7 +145,7 @@ export async function getRecords(data: GetRecordsInput) {
       perPage,
       itemsCount,
     },
-  };
+  }
 }
 
 export async function getRecordByOwnerId(params: GetRecordByOwnderIdInput) {
@@ -172,13 +157,13 @@ export async function getRecordByOwnerId(params: GetRecordByOwnderIdInput) {
       include: {
         owner: true,
       },
-    });
+    })
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === "P2025")
+      if (e.code === 'P2025')
         throw new Error(`Record not found for ownerId ${params.ownerId}`, {
           cause: 404,
-        });
-    } else throw e;
+        })
+    } else throw e
   }
 }
