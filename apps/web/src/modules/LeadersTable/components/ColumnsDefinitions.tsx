@@ -1,8 +1,7 @@
- 
 import type { RecordData } from '@/api/types'
 import type { ColumnDef } from '@tanstack/react-table'
-import formatRelative from 'date-fns/formatRelative'
-import en from 'date-fns/locale/en-US'
+import { formatRelative } from 'date-fns/formatRelative'
+import { enUS as en } from 'date-fns/locale/en-US'
 
 // To add meta fields modify react-table.d.ts file in the root dir of the module
 const columns: ColumnDef<RecordData>[] = [
