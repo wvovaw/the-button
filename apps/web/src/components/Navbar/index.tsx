@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,8 +7,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/NavigationMenu'
+import { Switch } from '@/components/ui/Switch'
 import { useAuth } from '@/hooks/useAuth'
-import { ChevronDown, LogOut, SettingsIcon, User } from 'lucide-react'
+import { useTheme } from '@/hooks/useTheme'
+import { ChevronDown, Lightbulb, LogOut, SettingsIcon, User } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { NavbarButtonLink, NavbarLink } from './components/Link'
 
@@ -34,7 +37,15 @@ export default function Navbar() {
 
 function UsernameOrLogin({ className }: { className?: string }) {
   const authCtx = useAuth()
-  if (!authCtx) throw new Error('AuthContext is not available')
+  const { theme, set: setTheme } = useTheme()
+
+  function themeSwitchHandler(e: MouseEvent<HTMLElement>) {
+    e.stopPropagation()
+    e.preventDefault()
+
+    if (theme === 'light') setTheme('dark')
+    else setTheme('light')
+  }
 
   const navigate = useNavigate()
 
@@ -60,6 +71,11 @@ function UsernameOrLogin({ className }: { className?: string }) {
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
+              <DropdownMenuItem className="cursor-pointer" onClick={(e) => themeSwitchHandler(e)}>
+                <Lightbulb className="mr-2 h-4 w-4" />
+                <span className="mr-2">Light Theme</span>
+                <Switch checked={theme === 'light'} />
+              </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
                 onClick={() => authCtx.signOut(() => navigate('/', { replace: true }))}
