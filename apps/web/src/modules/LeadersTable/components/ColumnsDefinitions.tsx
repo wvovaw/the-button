@@ -1,8 +1,8 @@
-/* eslint-disable import/no-duplicates */
-import { ColumnDef } from '@tanstack/react-table'
+ 
+import type { RecordData } from '@/api/types'
+import type { ColumnDef } from '@tanstack/react-table'
 import formatRelative from 'date-fns/formatRelative'
 import en from 'date-fns/locale/en-US'
-import { type RecordData } from '@/api/types'
 
 // To add meta fields modify react-table.d.ts file in the root dir of the module
 const columns: ColumnDef<RecordData>[] = [

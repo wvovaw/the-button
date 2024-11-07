@@ -1,7 +1,7 @@
-import { type ElementRef, type ComponentPropsWithoutRef, forwardRef } from 'react'
+import { cn } from '@/lib/utils'
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
 
-import { cn } from '@/lib/utils'
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react'
 
 const Avatar = forwardRef<
   ElementRef<typeof AvatarPrimitive.Root>,
@@ -35,4 +35,4 @@ const AvatarFallback = forwardRef<
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
-export { Avatar, AvatarImage, AvatarFallback }
+export { Avatar, AvatarFallback, AvatarImage }

@@ -1,6 +1,6 @@
-import { useRecords } from './hooks/useRecords'
-import { DataTable } from './components/DataTable'
 import columns from './components/ColumnsDefinitions'
+import { DataTable } from './components/DataTable'
+import { useRecords } from './hooks/useRecords'
 
 export default function LeaderboardTable() {
   const { records, pagination, setPagination } = useRecords()

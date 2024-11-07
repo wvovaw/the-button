@@ -1,4 +1,4 @@
-import { SignInRequestData, SignInResponseData } from '../types'
+import type { SignInRequestData, SignInResponseData } from '../types'
 import client from '../client'
 
 export async function signIn(signInData: SignInRequestData): Promise<SignInResponseData> {

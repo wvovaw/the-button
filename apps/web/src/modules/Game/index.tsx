@@ -1,10 +1,10 @@
-import { SettingsProvider } from './contexts/SettingsContext'
-import { GameProvider } from './contexts/GameContext'
+import ErrorIndicator from './components/ErrorIndicator'
+import { SettingsPopover } from './components/SettingsPopover'
 import Stats from './components/Stats'
 import TheButton from './components/TheButton'
 import UpdateIndicator from './components/UpdateIndicator'
-import ErrorIndicator from './components/ErrorIndicator'
-import { SettingsPopover } from './components/SettingsPopover'
+import { GameProvider } from './contexts/GameContext'
+import { SettingsProvider } from './contexts/SettingsContext'
 
 export default function Game() {
   return (

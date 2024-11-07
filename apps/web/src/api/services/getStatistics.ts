@@ -1,4 +1,4 @@
-import { StatisticsResponseData } from '../types'
+import type { StatisticsResponseData } from '../types'
 import client from '../client'
 
 export async function getStatistics(): Promise<StatisticsResponseData> {

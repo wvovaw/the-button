@@ -1,8 +1,8 @@
-import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
+import type { Table } from '@tanstack/react-table'
 import { Button } from '@/components/ui/Button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/Select'
 
-import { type Table } from '@tanstack/react-table'
+import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
 import TABLE_CONFING from '../constants'
 
 interface TablePaginationProps<TData> {

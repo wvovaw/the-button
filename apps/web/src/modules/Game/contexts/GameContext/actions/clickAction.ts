@@ -1,5 +1,5 @@
-import { type Dispatch } from 'react'
-import { SetHighscore, type GameActions, type GameState } from '../reducers/gameReducer'
+import type { Dispatch } from 'react'
+import type { GameActions, GameState, SetHighscore } from '../reducers/gameReducer'
 
 export async function clickAction(dispatch: Dispatch<GameActions>, state: GameState) {
   const P = Math.round(Math.random() * 100)

@@ -1,7 +1,7 @@
-import { Dispatch } from 'react'
-import { AxiosError } from 'axios'
-import { type GameActions, type GameState } from '../reducers/gameReducer'
+import type { Dispatch } from 'react'
+import type { GameActions, GameState } from '../reducers/gameReducer'
 import { getRecordByUserId } from '@/api/services/getRecordByUserId'
+import { AxiosError } from 'axios'
 
 export async function getRecordAction(dispatch: Dispatch<GameActions>, state: GameState) {
   try {

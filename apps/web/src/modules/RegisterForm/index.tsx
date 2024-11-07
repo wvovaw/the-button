@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
-
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { Loader2 } from 'lucide-react'
-
-import { registerSchema } from './schema'
+import type { z } from 'zod'
 import { signUp } from '@/api/services/signup'
+import { Button } from '@/components/ui/Button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
+import { Input } from '@/components/ui/Input'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+
+import { useNavigate } from 'react-router-dom'
+import { registerSchema } from './schema'
 
 export function RegisterForm() {
   const navigate = useNavigate()

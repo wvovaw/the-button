@@ -1,4 +1,4 @@
-import { RecordsPaginatedQuerystringData, RecordsPaginatedResponseData } from '../types'
+import type { RecordsPaginatedQuerystringData, RecordsPaginatedResponseData } from '../types'
 import client from '../client'
 
 export async function getRecordsPaginated(

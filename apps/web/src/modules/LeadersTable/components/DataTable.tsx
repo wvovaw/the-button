@@ -1,16 +1,17 @@
-import { useMemo, useState } from 'react'
-import {
+import type {
   ColumnDef,
+  PaginationState,
+  SortingState} from '@tanstack/react-table';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table'
+import {
   flexRender,
   getCoreRowModel,
-  useReactTable,
   getSortedRowModel,
-  SortingState,
-  PaginationState,
+  useReactTable
 } from '@tanstack/react-table'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table'
-import TablePagination from './TablePagination'
+import { useMemo, useState } from 'react'
 import { DataTableSkeleton } from './DataTableSkeleton'
+import TablePagination from './TablePagination'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -36,7 +37,7 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     pageCount: Math.ceil(rowsCount / pagination.pageSize),
-    onPaginationChange: onPaginationChange,
+    onPaginationChange,
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     state: {

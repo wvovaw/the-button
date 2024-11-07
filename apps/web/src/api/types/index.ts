@@ -1,26 +1,26 @@
-export type SignUpRequestData = {
+export interface SignUpRequestData {
   email: string
   name: string
   password: string
 }
-export type SignUpResponseData = {
+export interface SignUpResponseData {
   id: number
   email: string
   name: string
 }
-export type SignInRequestData = {
+export interface SignInRequestData {
   email: string
   password: string
 }
-export type SignInResponseData = {
+export interface SignInResponseData {
   accessToken: string
 }
-export type PostRecordRequesData = {
+export interface PostRecordRequesData {
   highscore?: number
   peaks?: number[]
   clicks?: number
 }
-export type RecordData = {
+export interface RecordData {
   id: number
   highscore: number
   totalResets: number
@@ -33,11 +33,11 @@ export type RecordData = {
   createdAt: string
   updatedAt: string
 }
-export type RecordsPaginatedQuerystringData = {
+export interface RecordsPaginatedQuerystringData {
   page: number
   perPage: number
 }
-export type RecordsPaginatedResponseData = {
+export interface RecordsPaginatedResponseData {
   data: RecordData[]
   meta: {
     page: number
@@ -45,7 +45,7 @@ export type RecordsPaginatedResponseData = {
     itemsCount: number
   }
 }
-export type StatisticsResponseData = {
+export interface StatisticsResponseData {
   totalClicks: number
   playersCount: number
   avgHighscore: number

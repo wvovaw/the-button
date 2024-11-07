@@ -1,38 +1,35 @@
-import { PropsWithChildren, type ReactNode } from 'react'
-import { useGame } from '../contexts/GameContext'
+import type { PropsWithChildren, ReactNode } from 'react'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { useGame } from '../contexts/GameContext'
 
 export default function Stats() {
   const game = useGame()
   if (!game) throw new Error("Game context isn't available")
 
-  // const { , totalClicks } = game.state.stats;
   const { currentRecord, isUpdating } = game.state
 
   return (
-    <>
-      <div className="inset-x-center top-12 select-none">
-        <div className="flex flex-row gap-5 font-semibold text-muted">
-          <StatsColumn>
-            {isUpdating ? (
-              <>
-                <StatsRow label="Highscore" value={<Skeleton className="h-2 w-6 bg-accent" />} />
-                <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-8 bg-accent" />} />
-                <StatsRow label="AVG" value={<Skeleton className="h-2 w-6 bg-accent" />} />
-              </>
-            ) : currentRecord ? (
-              <>
-                <StatsRow label="Highscore" value={currentRecord.highscore} />
-                <StatsRow label="Total clicks" value={currentRecord.totalClicks} />
-                <StatsRow label="AVG" value={currentRecord.average.toFixed(2)} />
-              </>
-            ) : (
-              <div className="text-sm">No data. Click!</div>
-            )}
-          </StatsColumn>
-        </div>
+    <div className="inset-x-center top-12 select-none">
+      <div className="flex flex-row gap-5 font-semibold text-muted">
+        <StatsColumn>
+          {isUpdating ? (
+            <>
+              <StatsRow label="Highscore" value={<Skeleton className="h-2 w-6 bg-accent" />} />
+              <StatsRow label="Total clicks" value={<Skeleton className="h-2 w-8 bg-accent" />} />
+              <StatsRow label="AVG" value={<Skeleton className="h-2 w-6 bg-accent" />} />
+            </>
+          ) : currentRecord ? (
+            <>
+              <StatsRow label="Highscore" value={currentRecord.highscore} />
+              <StatsRow label="Total clicks" value={currentRecord.totalClicks} />
+              <StatsRow label="AVG" value={currentRecord.average.toFixed(2)} />
+            </>
+          ) : (
+            <div className="text-sm">No data. Click!</div>
+          )}
+        </StatsColumn>
       </div>
-    </>
+    </div>
   )
 }
 

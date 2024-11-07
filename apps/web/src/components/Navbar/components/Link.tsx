@@ -1,8 +1,8 @@
-import { NavigationMenuLink, navigationMenuTriggerStyle } from '@/components/ui/NavigationMenu'
+import type { ReactNode } from 'react'
 import { Button } from '@/components/ui/Button'
-import { Link, useMatch } from 'react-router-dom'
-import { type ReactNode } from 'react'
+import { NavigationMenuLink, navigationMenuTriggerStyle } from '@/components/ui/NavigationMenu'
 import { cn } from '@/lib/utils'
+import { Link, useMatch } from 'react-router-dom'
 
 interface NavbarLinkProps {
   children: ReactNode

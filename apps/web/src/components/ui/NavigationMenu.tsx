@@ -1,9 +1,9 @@
-import { type ElementRef, type ComponentPropsWithoutRef, forwardRef } from 'react'
+import { cn } from '@/lib/utils'
 import * as NavigationMenuPrimitive from '@radix-ui/react-navigation-menu'
 import { cva } from 'class-variance-authority'
 import { ChevronDown } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react'
 
 const NavigationMenu = forwardRef<
   ElementRef<typeof NavigationMenuPrimitive.Root>,
@@ -108,13 +108,13 @@ const NavigationMenuIndicator = forwardRef<
 NavigationMenuIndicator.displayName = NavigationMenuPrimitive.Indicator.displayName
 
 export {
-  navigationMenuTriggerStyle,
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
   NavigationMenuContent,
-  NavigationMenuTrigger,
-  NavigationMenuLink,
   NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
   NavigationMenuViewport,
 }

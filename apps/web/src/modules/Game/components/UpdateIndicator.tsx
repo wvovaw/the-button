@@ -1,5 +1,5 @@
-import { useGame } from '../contexts/GameContext'
 import { Loader2 } from 'lucide-react'
+import { useGame } from '../contexts/GameContext'
 
 export default function UpdateIndicator() {
   const game = useGame()

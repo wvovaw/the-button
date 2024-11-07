@@ -1,6 +1,6 @@
-import { createContext, useContext, useReducer, useMemo, type PropsWithChildren, type Dispatch } from 'react'
 import { useEffectOnce, useLocalStorage, useUpdateEffect } from '@/hooks/usehooks-ts'
-import { type SettingsState, type SettingsActions, settingsReducer } from './reducers/settingsReducer'
+import { createContext, type Dispatch, type PropsWithChildren, useContext, useMemo, useReducer } from 'react'
+import { type SettingsActions, settingsReducer, type SettingsState } from './reducers/settingsReducer'
 
 const SettingsContext = createContext<{ state: SettingsState; dispatch: Dispatch<SettingsActions> } | null>(null)
 

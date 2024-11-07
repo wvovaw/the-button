@@ -1,15 +1,15 @@
-import { useAuth } from '@/hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/NavigationMenu'
-import { NavbarButtonLink, NavbarLink } from './components/Link'
 import {
   DropdownMenu,
-  DropdownMenuItem,
   DropdownMenuContent,
-  DropdownMenuTrigger,
+  DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/NavigationMenu'
+import { useAuth } from '@/hooks/useAuth'
 import { ChevronDown, LogOut, SettingsIcon, User } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { NavbarButtonLink, NavbarLink } from './components/Link'
 
 export default function Navbar() {
   return (

@@ -1,14 +1,14 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider } from './HOC/AuthProvider'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { BaseLayout } from './layouts/BaseLayout'
 import { HomePage } from './pages/HomePage'
-import { LoginPage } from './pages/LoginPage'
 import { LeaderboardPage } from './pages/LeaderboardPage'
+import { LoginPage } from './pages/LoginPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { PlayerProfilePage } from './pages/PlayerProfilePage'
-import { RequireAuth } from './HOC/RequireAuth'
 import { PlayPage } from './pages/PlayPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { AuthProvider } from './providers/AuthProvider'
+import { RequireAuth } from './providers/RequireAuth'
 
 function App() {
   return (

@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { StatisticsResponseData } from '@/api/types'
+import type { StatisticsResponseData } from '@/api/types'
 import { getStatistics } from '@/api/services/getStatistics'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip'
 import { useEffectOnce } from '@/hooks/usehooks-ts'
 import { shorthandNumber } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip'
+import { useState } from 'react'
 
 export function Stats() {
   const [stats, setStats] = useState<StatisticsResponseData | null>(null)

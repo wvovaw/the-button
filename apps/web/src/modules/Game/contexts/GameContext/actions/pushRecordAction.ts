@@ -1,9 +1,9 @@
-import { Dispatch } from 'react'
-import { setStatsAction } from './setStatsAction'
-import { type Stats, type GameActions, type GameState } from '../reducers/gameReducer'
-import { type RecordData, type PostRecordRequesData } from '@/api/types'
+import type { PostRecordRequesData, RecordData } from '@/api/types'
+import type { Dispatch } from 'react'
+import type { GameActions, GameState, Stats } from '../reducers/gameReducer'
 import { createRecord } from '@/api/services/createRecord'
 import { updateRecord } from '@/api/services/updateRecord'
+import { setStatsAction } from './setStatsAction'
 
 /**
  * If player has no record sign in the DB - creates new record

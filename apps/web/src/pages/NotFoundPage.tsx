@@ -1,12 +1,10 @@
 export function NotFoundPage() {
   return (
-    <>
-      <div className="mx-auto grid h-[calc(100vh-85px)] max-w-4xl place-content-center text-center">
-        <Doodle />
-        <h1 className="mt-6 text-2xl font-bold tracking-tight text-foreground sm:text-4xl">404</h1>
-        <p className="mt-4 text-muted-foreground">Page not found</p>
-      </div>
-    </>
+    <div className="mx-auto grid h-[calc(100vh-85px)] max-w-4xl place-content-center text-center">
+      <Doodle />
+      <h1 className="mt-6 text-2xl font-bold tracking-tight text-foreground sm:text-4xl">404</h1>
+      <p className="mt-4 text-muted-foreground">Page not found</p>
+    </div>
   )
 }
 

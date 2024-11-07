@@ -1,12 +1,8 @@
-import { RegisterForm } from '@/modules/RegisterForm'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
+import { RegisterForm } from '@/modules/RegisterForm'
 
 export function RegisterPage() {
-  return (
-    <>
-      <RegisterCard />
-    </>
-  )
+  return <RegisterCard />
 }
 
 function RegisterCard() {

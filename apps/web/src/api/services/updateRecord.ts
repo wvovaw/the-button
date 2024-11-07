@@ -1,6 +1,6 @@
-import { PostRecordRequesData, RecordData } from '../types'
-import client from '../client'
+import type { PostRecordRequesData, RecordData } from '../types'
 import { createSignature } from '@/lib/signature'
+import client from '../client'
 
 export async function updateRecord(data: PostRecordRequesData): Promise<RecordData> {
   const signature = await createSignature(JSON.stringify(data))

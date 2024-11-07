@@ -1,11 +1,11 @@
-import { createContext, useReducer, useContext, useMemo, type Dispatch, type PropsWithChildren } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { useDebounce, useEffectOnce, useUpdateEffect } from '@/hooks/usehooks-ts'
+import { createContext, type Dispatch, type PropsWithChildren, useContext, useMemo, useReducer } from 'react'
 
-import { type GameState, type GameActions, gameReducer } from './reducers/gameReducer'
 import { clickAction } from './actions/clickAction'
 import { getRecordAction } from './actions/getRecordAction'
 import { pushRecordAction } from './actions/pushRecordAction'
+import { type GameActions, gameReducer, type GameState } from './reducers/gameReducer'
 
 const GameContext = createContext<{ state: GameState; dispatch: Dispatch<GameActions> } | null>(null)
 
@@ -49,10 +49,10 @@ function GameProvider({ children }: PropsWithChildren) {
 
 function useGame() {
   const context = useContext(GameContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useGame must be used within a GameProvider')
   }
   return context
 }
 
-export { GameProvider, useGame, clickAction }
+export { clickAction, GameProvider, useGame }

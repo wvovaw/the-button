@@ -1,18 +1,18 @@
-import { z } from 'zod'
+import type { UserProfile } from '@/providers/AuthProvider'
+import type { z } from 'zod'
+import { signIn } from '@/api/services/signin'
+import { Button } from '@/components/ui/Button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
+import { Input } from '@/components/ui/Input'
+
+import { useAuth } from '@/hooks/useAuth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { jwtDecode } from 'jwt-decode'
+import { Loader2 } from 'lucide-react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { jwtDecode } from 'jwt-decode'
 import { loginSchema } from './schema'
-
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { signIn } from '@/api/services/signin'
-import { UserProfile } from '@/HOC/AuthProvider'
-import { useAuth } from '@/hooks/useAuth'
-import { useState } from 'react'
-import { Loader2 } from 'lucide-react'
 
 export function LoginForm() {
   const navigate = useNavigate()

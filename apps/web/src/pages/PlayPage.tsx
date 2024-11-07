@@ -1,11 +1,7 @@
 import Game from '@/modules/Game'
 
 function PlayPage() {
-  return (
-    <>
-      <Game />
-    </>
-  )
+  return <Game />
 }
 
 export { PlayPage }

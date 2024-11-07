@@ -1,13 +1,13 @@
-import { type RecordData } from '@/api/types'
+import type { RecordData } from '@/api/types'
 
-export type Stats = {
+export interface Stats {
   counter: number
   highscore: number | null // Last highscore
   totalClicks: number // Counts every clickAction untill a new record
   peaks: number[] // Save here every value that was reached before counter reset
 }
 
-export type GameState = {
+export interface GameState {
   stats: Stats
   currentRecord: RecordData | null // Current player's record (gets it from the DB)
   isUpdating: boolean // True when asyn update record job is on
@@ -15,13 +15,13 @@ export type GameState = {
   userId: number
 }
 
-export type Increment = { type: 'INCREMENT' }
-export type SetHighscore = { type: 'SET_HIGHSCORE'; payload: { highscore: number | null } }
-export type Reset = { type: 'RESET' }
-export type SetStats = { type: 'SET_STATS'; payload: { stats: Stats } }
-export type UpdateRecordStart = { type: 'UPDATE:START' }
-export type UpdateRecordResolve = { type: 'UPDATE:RESOLVE'; payload: { record: RecordData } }
-export type UpdateRecordReject = { type: 'UPDATE:REJECT'; payload: { errorMessage: string } }
+export interface Increment { type: 'INCREMENT' }
+export interface SetHighscore { type: 'SET_HIGHSCORE'; payload: { highscore: number | null } }
+export interface Reset { type: 'RESET' }
+export interface SetStats { type: 'SET_STATS'; payload: { stats: Stats } }
+export interface UpdateRecordStart { type: 'UPDATE:START' }
+export interface UpdateRecordResolve { type: 'UPDATE:RESOLVE'; payload: { record: RecordData } }
+export interface UpdateRecordReject { type: 'UPDATE:REJECT'; payload: { errorMessage: string } }
 
 export type GameActions =
   | Increment

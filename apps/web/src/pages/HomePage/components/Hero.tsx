@@ -1,12 +1,11 @@
 import { Button } from '@/components/ui/Button'
-import { Stats } from './Stats'
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
+import { ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Stats } from './Stats'
 
 export function Hero() {
-  const authCtx = useAuth()
-  if (!authCtx) throw new Error('AuthProvider is not available')
+  const { isAuthenticated } = useAuth()
 
   return (
     <section className="mx-auto flex flex-col justify-center pt-4 font-body sm:px-6 sm:py-12 lg:flex-row lg:justify-between lg:py-24">
@@ -22,7 +21,7 @@ export function Hero() {
           <Button variant="link" className="px-8 py-3 text-lg font-semibold text-accent">
             I&apos;m just a link
           </Button>
-          {authCtx.isAuthenticated() ? (
+          {isAuthenticated() ? (
             <Button variant="default" className="px-8 py-3 text-lg font-semibold" asChild>
               <Link to="/play">
                 Play!

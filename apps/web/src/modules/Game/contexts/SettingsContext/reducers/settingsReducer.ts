@@ -1,8 +1,8 @@
-export type SettingsState = {
+export interface SettingsState {
   sounds: boolean
 }
 
-export type ToggleSound = { type: 'TOGGLE_SOUND' }
+export interface ToggleSound { type: 'TOGGLE_SOUND' }
 
 export type SettingsActions = ToggleSound
 

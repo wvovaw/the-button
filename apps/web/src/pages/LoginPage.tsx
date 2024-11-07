@@ -1,12 +1,8 @@
-import { LoginForm } from '@/modules/LoginForm'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
+import { LoginForm } from '@/modules/LoginForm'
 
 export function LoginPage() {
-  return (
-    <>
-      <LoginCard />
-    </>
-  )
+  return <LoginCard />
 }
 
 function LoginCard() {

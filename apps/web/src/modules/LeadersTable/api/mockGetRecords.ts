@@ -1,5 +1,5 @@
+import type { RecordData } from '@/api/types'
 import { faker } from '@faker-js/faker'
-import { type RecordData } from '@/api/types/index'
 
 const range = (len: number) => {
   const arr = []

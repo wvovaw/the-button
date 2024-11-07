@@ -1,8 +1,8 @@
-import { useCallback } from 'react'
-import { clickAction, useGame } from '../contexts/GameContext'
-import useSound from 'use-sound'
 import clickInSound from '@/assets/sounds/click-in.mp3'
 import clickOutSound from '@/assets/sounds/click-out.mp3'
+import { useCallback } from 'react'
+import useSound from 'use-sound'
+import { clickAction, useGame } from '../contexts/GameContext'
 import { useSettings } from '../contexts/SettingsContext'
 
 export default function TheButton() {

@@ -1,11 +1,7 @@
 import { Hero } from './components/Hero'
 
 function HomePage() {
-  return (
-    <>
-      <Hero />
-    </>
-  )
+  return <Hero />
 }
 
 export { HomePage }
