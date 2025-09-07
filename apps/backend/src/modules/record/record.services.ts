@@ -1,8 +1,9 @@
+import type { Record as UserRecord } from '@prisma/client'
 import type { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 import { Prisma } from '@prisma/client'
 import prisma from '../../utils/prisma'
 
-export async function createRecord(data: CreateRecordInput & { ownerId: number }) {
+export async function createRecord(data: CreateRecordInput & { ownerId: number }): Promise<UserRecord> {
   try {
     type RecordCreateData = Parameters<typeof prisma.record.create>[0]['data']
     const record: RecordCreateData = {
@@ -39,13 +40,11 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
         })
       }
     }
-    else {
-      throw e
-    }
+    throw e
   }
 }
 
-export async function updateRecord(data: UpdateRecordInput & { ownerId: number }) {
+export async function updateRecord(data: UpdateRecordInput & { ownerId: number }): Promise<UserRecord> {
   try {
     type RecordUpdateData = Parameters<typeof prisma.record.update>[0]['data']
     const record: RecordUpdateData = {}
@@ -99,9 +98,7 @@ export async function updateRecord(data: UpdateRecordInput & { ownerId: number }
         })
       }
     }
-    else {
-      throw e
-    }
+    throw e
   }
 }
 
@@ -182,8 +179,6 @@ export async function getRecordByOwnerId(params: GetRecordByOwnderIdInput) {
         })
       }
     }
-    else {
-      throw e
-    }
+    throw e
   }
 }

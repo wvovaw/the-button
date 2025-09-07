@@ -1,9 +1,10 @@
+import type { User } from '@prisma/client'
 import type { CreateUserInput } from './user.schemas'
 import { Prisma } from '@prisma/client'
 import { hashPassword } from '../../utils/hash'
 import prisma from '../../utils/prisma'
 
-export async function createUser(input: CreateUserInput) {
+export async function createUser(input: CreateUserInput): Promise<User> {
   const { password, ...rest } = input
 
   const { hash, salt } = hashPassword(password)
@@ -23,13 +24,11 @@ export async function createUser(input: CreateUserInput) {
         })
       }
     }
-    else {
-      throw e
-    }
+    throw e
   }
 }
 
-export async function findUserByEmail(email: string) {
+export async function findUserByEmail(email: string): Promise<User | null> {
   return prisma.user.findUnique({
     where: {
       email,
@@ -37,7 +36,7 @@ export async function findUserByEmail(email: string) {
   })
 }
 
-export async function findUsers() {
+export async function findUsers(): Promise<Omit<User, 'password' | 'salt'>[]> {
   return prisma.user.findMany({
     select: {
       email: true,
