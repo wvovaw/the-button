@@ -1,12 +1,13 @@
+import type { PinoLoggerOptions } from 'fastify/types/logger'
+import process from 'node:process'
 import { fastify } from 'fastify'
-import { PinoLoggerOptions } from 'fastify/types/logger'
-import setupSwagger from './setupSwagger'
 import setupCloseWithGrace from './setupCloseWithGrace'
-import setupRoutes from './setupRoutes'
-import setupJWT from './setupJWT'
 import setupCors from './setupCors'
-import setupErrorHandler from './setupErrorHandler'
 import setupEnv from './setupEnv'
+import setupErrorHandler from './setupErrorHandler'
+import setupJWT from './setupJWT'
+import setupRoutes from './setupRoutes'
+import setupSwagger from './setupSwagger'
 
 async function buildServer() {
   const loggerConfig: Record<string, PinoLoggerOptions | boolean> = {

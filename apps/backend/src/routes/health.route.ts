@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import prisma from '../utils/prisma'
 
 async function healthcheckRoute(server: FastifyInstance) {
@@ -19,7 +19,7 @@ async function healthcheckRoute(server: FastifyInstance) {
             properties: {
               message: { type: 'string', default: 'Unhealthy' },
             },
-            description: "Server couldn't establish connection with the DB",
+            description: 'Server couldn\'t establish connection with the DB',
           },
         },
         description: 'Checks if Supabase instance is up and running',
@@ -29,7 +29,8 @@ async function healthcheckRoute(server: FastifyInstance) {
       try {
         await prisma.$queryRaw`SELECT 1`
         res.status(200).send({ message: 'Healthy' })
-      } catch {
+      }
+      catch {
         res.status(500).send({ message: 'Unhealthy' })
       }
     },

@@ -1,5 +1,5 @@
-import { FastifyReply, FastifyRequest } from 'fastify'
-import { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import type { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 import { createRecord, deleteRecord, getRecordByOwnerId, getRecords, updateRecord } from './record.services'
 
 export async function createRecordHandler(

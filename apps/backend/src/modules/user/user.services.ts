@@ -1,7 +1,7 @@
+import type { CreateUserInput } from './user.schemas'
 import { Prisma } from '@prisma/client'
 import { hashPassword } from '../../utils/hash'
 import prisma from '../../utils/prisma'
-import { CreateUserInput } from './user.schemas'
 
 export async function createUser(input: CreateUserInput) {
   const { password, ...rest } = input
@@ -14,13 +14,18 @@ export async function createUser(input: CreateUserInput) {
     })
 
     return user
-  } catch (e) {
+  }
+  catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002')
+      if (e.code === 'P2002') {
         throw new Error(`Unique constrain failed. Email and/or name is already has been taken.`, {
           cause: 409,
         })
-    } else throw e
+      }
+    }
+    else {
+      throw e
+    }
   }
 }
 

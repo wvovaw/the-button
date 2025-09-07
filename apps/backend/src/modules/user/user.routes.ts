@@ -1,5 +1,5 @@
-import { FastifyInstance } from 'fastify'
-import { loginHandler, registerUserHandler, getUsersHandler } from './user.controllers'
+import type { FastifyInstance } from 'fastify'
+import { getUsersHandler, loginHandler, registerUserHandler } from './user.controllers'
 import { $ref } from './user.schemas'
 
 async function userRoutes(server: FastifyInstance) {

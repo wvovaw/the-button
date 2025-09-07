@@ -1,7 +1,7 @@
-import { FastifyInstance } from 'fastify'
-import { userRouter, userSchemas } from '../modules/user'
+import type { FastifyInstance } from 'fastify'
 import { recordRouter, recordSchemas } from '../modules/record'
 import { statisticsRouter, statisticsSchemas } from '../modules/statistics'
+import { userRouter, userSchemas } from '../modules/user'
 
 import healthcheckRoute from '../routes/health.route'
 

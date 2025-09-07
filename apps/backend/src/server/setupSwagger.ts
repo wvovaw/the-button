@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyReplyContext, FastifyRequest } from 'fastify'
+import type { FastifyInstance, FastifyReplyContext, FastifyRequest } from 'fastify'
 import swagger from '@fastify/swagger'
 import { fastifySwaggerUi } from '@fastify/swagger-ui'
 import { withRefResolver } from 'fastify-zod'
@@ -29,8 +29,7 @@ export default function (server: FastifyInstance) {
       },
     }),
   )
-  // @ts-ignore
-  // i don't know why but this fastify-swager-ui plugin is kind of incompatible with this register method. But it still works
+  // @ts-expect-error i don't know why but this fastify-swager-ui plugin is kind of incompatible with this register method. But it still works
   server.register(fastifySwaggerUi, {
     prefix: '/docs',
     uiConfig: {
@@ -38,10 +37,10 @@ export default function (server: FastifyInstance) {
       deepLinking: false,
     },
     uiHooks: {
-      onRequest: function (request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
+      onRequest(request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
         next()
       },
-      preHandler: function (request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
+      preHandler(request: FastifyRequest, reply: FastifyReplyContext, next: () => void) {
         next()
       },
     },

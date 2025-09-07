@@ -1,6 +1,6 @@
+import type { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 import { Prisma } from '@prisma/client'
 import prisma from '../../utils/prisma'
-import { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
 
 export async function createRecord(data: CreateRecordInput & { ownerId: number }) {
   try {
@@ -13,8 +13,10 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
       totalResets: 0,
       highscore: 0,
     }
-    if (data.highscore) record.highscore = data.highscore
-    if (data.clicks) record.totalClicks = data.clicks
+    if (data.highscore)
+      record.highscore = data.highscore
+    if (data.clicks)
+      record.totalClicks = data.clicks
     if (data.peaks) {
       const weight = data.peaks.length
       record.average = data.peaks.reduce((acc, cur) => acc + cur) / weight
@@ -28,13 +30,18 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
         owner: true,
       },
     })
-  } catch (e) {
+  }
+  catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002')
+      if (e.code === 'P2002') {
         throw new Error(`The user with id ${data.ownerId} already has a Record associated with it`, {
           cause: 409,
         })
-    } else throw e
+      }
+    }
+    else {
+      throw e
+    }
   }
 }
 
@@ -43,8 +50,10 @@ export async function updateRecord(data: UpdateRecordInput & { ownerId: number }
     type RecordUpdateData = Parameters<typeof prisma.record.update>[0]['data']
     const record: RecordUpdateData = {}
 
-    if (data.clicks) record.totalClicks = { increment: data.clicks }
-    if (data.highscore) record.highscore = data.highscore
+    if (data.clicks)
+      record.totalClicks = { increment: data.clicks }
+    if (data.highscore)
+      record.highscore = data.highscore
     if (data.peaks) {
       const currentAverage = await prisma.record.findUnique({
         where: {
@@ -81,13 +90,18 @@ export async function updateRecord(data: UpdateRecordInput & { ownerId: number }
         owner: true,
       },
     })
-  } catch (e) {
+  }
+  catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002')
+      if (e.code === 'P2002') {
         throw new Error(`The user with id ${data.ownerId} doesn not have a Record associated with them`, {
           cause: 404,
         })
-    } else throw e
+      }
+    }
+    else {
+      throw e
+    }
   }
 }
 
@@ -98,12 +112,14 @@ export async function deleteRecord(ownerId: number) {
         ownerId,
       },
     })
-  } catch (e: unknown) {
+  }
+  catch (e: unknown) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2025')
+      if (e.code === 'P2025') {
         throw new Error(`Record not found.`, {
           cause: 404,
         })
+      }
     }
   }
 }
@@ -157,12 +173,17 @@ export async function getRecordByOwnerId(params: GetRecordByOwnderIdInput) {
         owner: true,
       },
     })
-  } catch (e) {
+  }
+  catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2025')
+      if (e.code === 'P2025') {
         throw new Error(`Record not found for ownerId ${params.ownerId}`, {
           cause: 404,
         })
-    } else throw e
+      }
+    }
+    else {
+      throw e
+    }
   }
 }

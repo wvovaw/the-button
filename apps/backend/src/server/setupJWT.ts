@@ -1,12 +1,12 @@
-import { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify'
-import fjwt, { JWT } from '@fastify/jwt'
+import type { JWT } from '@fastify/jwt'
+import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import fjwt from '@fastify/jwt'
 
 declare module 'fastify' {
   interface FastifyRequest {
     jwt: JWT
   }
   export interface FastifyInstance {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     authenticate: any
   }
 }
@@ -24,14 +24,15 @@ export default function (server: FastifyInstance) {
   server.register(fjwt, {
     secret: server.config.JWT_SECRET,
     verify: {
-      extractToken: (request) => request.headers.authorization?.split(' ').at(1),
+      extractToken: request => request.headers.authorization?.split(' ').at(1),
     },
   })
 
   server.decorate('authenticate', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       await request.jwtVerify()
-    } catch (e) {
+    }
+    catch (e) {
       return reply.send(e)
     }
   })

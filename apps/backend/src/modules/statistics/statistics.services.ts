@@ -1,4 +1,4 @@
-import { type Statistics } from './statistics.schemas'
+import type { Statistics } from './statistics.schemas'
 import prisma from '../../utils/prisma'
 
 export async function getStatistics(): Promise<Statistics> {

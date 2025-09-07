@@ -1,4 +1,4 @@
-import { FastifyInstance } from 'fastify'
+import type { FastifyInstance } from 'fastify'
 import { getStatisticsHandler } from './statistics.controller'
 import { $ref } from './statistics.schemas'
 

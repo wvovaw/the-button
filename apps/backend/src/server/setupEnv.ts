@@ -1,7 +1,9 @@
+import type { FastifyEnvOptions } from '@fastify/env'
+import type { FastifyInstance } from 'fastify'
+import type { FromSchema } from 'json-schema-to-ts'
 import path from 'node:path'
-import { FastifyInstance } from 'fastify'
-import { FastifyEnvOptions, fastifyEnv } from '@fastify/env'
-import { FromSchema } from 'json-schema-to-ts'
+import process from 'node:process'
+import { fastifyEnv } from '@fastify/env'
 
 const schema = {
   type: 'object',

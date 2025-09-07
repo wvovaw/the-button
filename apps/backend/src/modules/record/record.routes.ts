@@ -1,4 +1,5 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify'
+import { verifySignature } from '../../utils/hash'
 import {
   createRecordHandler,
   deleteRecordHandler,
@@ -7,7 +8,6 @@ import {
   updateRecordHandler,
 } from './record.controllers'
 import { $ref } from './record.schemas'
-import { verifySignature } from '../../utils/hash'
 
 async function recordRoutes(server: FastifyInstance) {
   async function validSignature(request: FastifyRequest, reply: FastifyReply) {
@@ -25,11 +25,17 @@ async function recordRoutes(server: FastifyInstance) {
             signature,
             secret,
           })
-        )
+        ) {
           throw new Error('Your signature sucks')
-      } else throw new Error('Signature not provided')
-    } catch (e) {
-      if (e instanceof Error) return reply.code(409).send(e.message)
+        }
+      }
+      else {
+        throw new TypeError('Signature not provided')
+      }
+    }
+    catch (e) {
+      if (e instanceof Error)
+        return reply.code(409).send(e.message)
       else return reply.code(400).send('You lie')
     }
   }
@@ -122,7 +128,7 @@ async function recordRoutes(server: FastifyInstance) {
             description: 'Successfully created new record',
           },
           409: {
-            description: "Record not found and can't be updated",
+            description: 'Record not found and can\'t be updated',
             type: 'object',
             properties: {
               statusCode: { type: 'number', default: 409 },
@@ -155,11 +161,11 @@ async function recordRoutes(server: FastifyInstance) {
       schema: {
         response: {
           204: {
-            description: "Successfully deleted user's record",
+            description: 'Successfully deleted user\'s record',
             type: 'null',
           },
           404: {
-            description: "Record not found and can't be deleted",
+            description: 'Record not found and can\'t be deleted',
             type: 'object',
             properties: {
               statusCode: { type: 'number', default: 404 },

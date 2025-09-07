@@ -1,17 +1,16 @@
 {
-  "name": "backend",
+  "name": "the-button@backend",
   "version": "1.0.0",
-  "license": "MIT",
   "author": "wvovaw",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "tsup-node src",
-    "dev": "NODE_ENV=development tsnd --respawn --transpile-only --exit-child src/app.ts",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "build": "tsdown",
+    "dev": "tsx watch src/app.ts",
     "lint": "eslint . --fix --cache",
     "prisma:dev": "dotenv -e .env.development prisma",
     "prisma:prod": "dotenv -e .env.production prisma",
-    "start": "NODE_ENV=production node dist/app.js",
+    "start": "dotenv -e .env.production node dist/app.js",
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
@@ -29,26 +28,17 @@
     "zod-to-json-schema": "^3.23.5"
   },
   "devDependencies": {
-    "@eslint/js": "^9.13.0",
-    "@prisma/client": "^5.21.1",
-    "@trivago/prettier-plugin-sort-imports": "4.1.1",
-    "@types/eslint__js": "^8.42.3",
+    "@antfu/eslint-config": "^5.2.2",
+    "@prisma/client": "^6.15.0",
     "@types/node": "^20.17.5",
     "dotenv": "^16.4.5",
     "dotenv-cli": "^7.4.2",
-    "eslint": "^9.13.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "husky": "^9.1.6",
+    "eslint": "^9.34.0",
     "pino-pretty": "^11.3.0",
-    "prettier": "^3.3.3",
-    "prisma": "^5.21.1",
-    "sort-package-json": "2.5.0",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "tsup": "^8.3.5",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "prisma": "^6.15.0",
+    "tsdown": "^0.14.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.6.3"
   },
   "template": "TomDoesTech/fastify-prisma-rest-api, MIT"
 }

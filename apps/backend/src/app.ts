@@ -1,23 +1,16 @@
+import process from 'node:process'
 import buildServer from './server'
 
-async function main() {
-  try {
-    const server = await buildServer()
-    void server.listen({
-      port: server.config.PORT,
-      host: server.config.SERVER_HOSTNAME,
-    })
+buildServer().then((server) => {
+  void server.listen({
+    port: server.config.PORT,
+    host: server.config.SERVER_HOSTNAME,
+  })
 
-    server.ready((err: Error) => {
-      if (err) {
-        server.log.error(err)
-        process.exit(1)
-      }
-    })
-  } catch (e) {
-    console.error(e)
-    process.exit(1)
-  }
-}
-
-main()
+  server.ready((e) => {
+    if (e instanceof Error) {
+      server.log.fatal(e, 'Server failed on start')
+      process.exit(1)
+    }
+  })
+})
