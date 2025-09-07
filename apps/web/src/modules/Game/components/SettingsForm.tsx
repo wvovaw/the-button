@@ -1,5 +1,5 @@
-import { Label } from '@/components/ui/Label'
-import { Switch } from '@/components/ui/Switch'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 import { useSettings } from '../contexts/SettingsContext'
 import { toggleSoundAction } from '../contexts/SettingsContext/actions/toggleSoundAction'
 

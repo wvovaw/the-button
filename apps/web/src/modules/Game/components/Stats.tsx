@@ -1,5 +1,5 @@
 import type { PropsWithChildren, ReactNode } from 'react'
-import { Skeleton } from '@/components/ui/Skeleton'
+import { Skeleton } from '@/components/ui/skeleton'
 import { useGame } from '../contexts/GameContext'
 
 export default function Stats() {

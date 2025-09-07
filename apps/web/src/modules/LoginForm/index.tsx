@@ -1,9 +1,9 @@
 import type { UserProfile } from '@/providers/AuthProvider'
 import type { z } from 'zod'
 import { signIn } from '@/api/services/signin'
-import { Button } from '@/components/ui/Button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
-import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 import { useAuth } from '@/hooks/useAuth'
 import { zodResolver } from '@hookform/resolvers/zod'

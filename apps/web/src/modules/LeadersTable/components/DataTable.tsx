@@ -2,7 +2,7 @@ import type {
   ColumnDef,
   PaginationState,
   SortingState} from '@tanstack/react-table';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/Table'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import {
   flexRender,
   getCoreRowModel,

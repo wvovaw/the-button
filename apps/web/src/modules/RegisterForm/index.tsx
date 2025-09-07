@@ -1,8 +1,8 @@
 import type { z } from 'zod'
 import { signUp } from '@/api/services/signup'
-import { Button } from '@/components/ui/Button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/Form'
-import { Input } from '@/components/ui/Input'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'

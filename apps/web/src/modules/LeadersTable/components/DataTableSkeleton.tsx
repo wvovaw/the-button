@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import { Skeleton } from '@/components/ui/Skeleton'
-import { TableCell, TableRow } from '@/components/ui/Table'
+import { Skeleton } from '@/components/ui/skeleton'
+import { TableCell, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
 import TABLE_CONFING from '../constants'
 

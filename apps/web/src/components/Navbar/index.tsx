@@ -5,9 +5,9 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/DropdownMenu'
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/NavigationMenu'
-import { Switch } from '@/components/ui/Switch'
+} from '@/components/ui/dropdown-menu'
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu'
+import { Switch } from '@/components/ui/switch'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
 import { ChevronDown, Lightbulb, LogOut, SettingsIcon, User } from 'lucide-react'
@@ -100,3 +100,4 @@ function UsernameOrLogin({ className }: { className?: string }) {
       </NavigationMenuList>
     )
 }
+

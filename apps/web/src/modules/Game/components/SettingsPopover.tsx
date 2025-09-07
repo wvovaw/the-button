@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/Button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover'
+import { Button } from '@/components/ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Settings } from 'lucide-react'
 import { SettingsForm } from './SettingsForm'
 

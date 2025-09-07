@@ -1,6 +1,6 @@
 import type { StatisticsResponseData } from '@/api/types'
 import { getStatistics } from '@/api/services/getStatistics'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/Tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useEffectOnce } from '@/hooks/usehooks-ts'
 import { shorthandNumber } from '@/lib/utils'
 import { useState } from 'react'

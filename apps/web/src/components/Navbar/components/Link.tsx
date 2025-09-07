@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import { Button } from '@/components/ui/Button'
-import { NavigationMenuLink, navigationMenuTriggerStyle } from '@/components/ui/NavigationMenu'
+import { Button } from '@/components/ui/button'
+import { NavigationMenuLink, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
 import { Link, useMatch } from 'react-router-dom'
 
