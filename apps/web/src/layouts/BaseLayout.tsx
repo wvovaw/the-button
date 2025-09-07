@@ -5,7 +5,7 @@ export function BaseLayout() {
   return (
     <>
       <Navbar />
-      <main className="container mt-4">
+      <main className="container mx-auto mt-4">
         <Outlet />
       </main>
     </>

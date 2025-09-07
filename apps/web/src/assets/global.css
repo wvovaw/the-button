@@ -123,3 +123,7 @@
 @utility inset-center {
   @apply inset-x-center inset-y-center;
 }
+
+body {
+  @apply bg-background;
+}
