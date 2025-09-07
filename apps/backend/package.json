@@ -10,7 +10,7 @@
     "lint": "eslint . --fix --cache",
     "prisma:dev": "dotenv -e .env.development prisma",
     "prisma:prod": "dotenv -e .env.production prisma",
-    "start": "dotenv -e .env.production node dist/app.js",
+    "start": "NODE_ENV=production node dist/app.js",
     "typecheck": "tsc -b --noEmit"
   },
   "dependencies": {
@@ -22,7 +22,6 @@
     "close-with-grace": "1.2.0",
     "fastify": "^5.0.0",
     "fastify-zod": "^1.4.0",
-    "json-schema-to-ts": "^3.1.1",
     "node-cache": "^5.1.2",
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.5"

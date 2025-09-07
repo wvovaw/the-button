@@ -9,9 +9,11 @@ import setupJWT from './setupJWT'
 import setupRoutes from './setupRoutes'
 import setupSwagger from './setupSwagger'
 
-async function buildServer() {
+export default async function () {
   const loggerConfig: Record<string, PinoLoggerOptions | boolean> = {
     development: {
+      // TODO: add LOG_LEVEL env var
+      // level: process.env.LOG_LEVEL,
       transport: {
         target: 'pino-pretty',
         options: {
@@ -40,5 +42,3 @@ async function buildServer() {
 
   return server
 }
-
-export default buildServer
