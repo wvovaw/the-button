@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 import { ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
-import TABLE_CONFING from '../constants'
+import { TABLE_CONFING } from '../constants'
 
 interface TablePaginationProps<TData> {
   table: Table<TData>

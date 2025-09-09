@@ -3,7 +3,6 @@ const TABLE_CONFING = {
     OPTIONS: [10, 20, 30],
   },
 }
-
 Object.freeze(TABLE_CONFING)
 
-export default TABLE_CONFING
+export { TABLE_CONFING }

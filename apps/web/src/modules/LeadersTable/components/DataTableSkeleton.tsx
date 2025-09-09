@@ -2,7 +2,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { cn } from '@/lib/utils'
-import TABLE_CONFING from '../constants'
+import { TABLE_CONFING } from '../constants'
 
 interface DataTableSkeletonProps<TData> {
   columnDefs: ColumnDef<TData>[]
@@ -15,7 +15,7 @@ function DataTableSkeleton<TData>({ columnDefs }: DataTableSkeletonProps<TData>)
   const numOfRows = TABLE_CONFING.PAGE_SIZE.OPTIONS.at(0)
   return (
     <>
-      {[...new Array(numOfRows)].map((_, ix) => (
+      {Array.from({ length: numOfRows ?? 0 }).map((_, ix) => (
         <RowSkeleton key={ix} columnDefs={columnDefs} />
       ))}
     </>
