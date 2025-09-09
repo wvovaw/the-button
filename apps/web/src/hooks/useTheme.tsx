@@ -16,7 +16,7 @@ export function useTheme() {
   }
 
   function setRootClass(value: string, toRemove?: string) {
-    const rootElement = document.querySelector('html')
+    const rootElement = document.documentElement
     if (rootElement) {
       if (toRemove) rootElement.classList.remove(toRemove)
       rootElement.classList.add(value)

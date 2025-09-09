@@ -8,7 +8,7 @@ export function RegisterPage() {
 function RegisterCard() {
   return (
     <div className="my-24 w-full">
-      <Card className="mx-auto max-w-xl">
+      <Card className="mx-auto max-w-xl shadow-xl">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
         </CardHeader>

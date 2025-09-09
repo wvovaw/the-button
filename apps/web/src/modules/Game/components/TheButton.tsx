@@ -35,7 +35,8 @@ export default function TheButton() {
   return (
     <div className="grid h-full w-full place-content-center">
       <button
-        className="aspect-[1/0.96] w-64 cursor-pointer select-none rounded-full border-[1px] border-secondary bg-primary font-heading text-9xl text-primary-foreground/70 transition-all duration-200 [box-shadow:0_12px_0_0_hsl(var(--accent)),0_20px_0_0_hsl(var(--secondary))] enabled:active:translate-y-2 enabled:active:border-b-[0px] enabled:active:[box-shadow:0_0px_0_0_hsl(var(--accent)),0_0px_0_0_hsl(var(--secondary))] disabled:cursor-not-allowed disabled:bg-primary/70 disabled:[box-shadow:0_12px_0_0_hsl(var(--accent)/0.6),0_20px_0_0_hsl(var(--secondary)/0.9)] md:w-96 md:duration-150 md:[box-shadow:0_16px_0_0_hsl(var(--accent)),0_30px_0_0_hsl(var(--secondary))] md:disabled:[box-shadow:0_16px_0_0_hsl(var(--accent)),0_30px_0_0_hsl(var(--secondary))]"
+        type="button"
+        className="the-button-3d"
         onClick={handleClick}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
