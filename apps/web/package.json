@@ -8,7 +8,6 @@
     "build": "tsc && vite build",
     "bundlesize": "npx vite-bundle-visualizer -o dist/.bundlesize.html --open",
     "lint": "eslint . --fix --cache",
-    "format": "prettier --write 'src/**/*.{js,ts,jsx,tsx,css,json,md}'",
     "typecheck": "vue-tsc -b --noEmit",
     "preview": "vite preview"
   },
