@@ -13,15 +13,34 @@ export interface GameState {
   isUpdating: boolean // True when asyn update record job is on
   errorMessage: string // Not empty if record request rejects
   userId: number
+  isInitialLoadComplete: boolean // True when initial record loading is complete
 }
 
-export interface Increment { type: 'INCREMENT' }
-export interface SetHighscore { type: 'SET_HIGHSCORE'; payload: { highscore: number | null } }
-export interface Reset { type: 'RESET' }
-export interface SetStats { type: 'SET_STATS'; payload: { stats: Stats } }
-export interface UpdateRecordStart { type: 'UPDATE:START' }
-export interface UpdateRecordResolve { type: 'UPDATE:RESOLVE'; payload: { record: RecordData } }
-export interface UpdateRecordReject { type: 'UPDATE:REJECT'; payload: { errorMessage: string } }
+export interface Increment {
+  type: 'INCREMENT'
+}
+export interface SetHighscore {
+  type: 'SET_HIGHSCORE'
+  payload: { highscore: number | null }
+}
+export interface Reset {
+  type: 'RESET'
+}
+export interface SetStats {
+  type: 'SET_STATS'
+  payload: { stats: Stats }
+}
+export interface UpdateRecordStart {
+  type: 'UPDATE:START'
+}
+export interface UpdateRecordResolve {
+  type: 'UPDATE:RESOLVE'
+  payload: { record: RecordData }
+}
+export interface UpdateRecordReject {
+  type: 'UPDATE:REJECT'
+  payload: { errorMessage: string }
+}
 
 export type GameActions =
   | Increment
@@ -74,10 +93,10 @@ export function gameReducer(state: GameState, action: GameActions): GameState {
       return { ...state, isUpdating: true }
     }
     case 'UPDATE:RESOLVE': {
-      return { ...state, isUpdating: false, currentRecord: action.payload.record }
+      return { ...state, isUpdating: false, currentRecord: action.payload.record, isInitialLoadComplete: true }
     }
     case 'UPDATE:REJECT': {
-      return { ...state, isUpdating: false, errorMessage: action.payload.errorMessage }
+      return { ...state, isUpdating: false, errorMessage: action.payload.errorMessage, isInitialLoadComplete: true }
     }
     default: {
       throw new Error(`Unknown action`)

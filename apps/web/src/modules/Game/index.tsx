@@ -2,6 +2,7 @@ import ErrorIndicator from './components/ErrorIndicator'
 import { SettingsPopover } from './components/SettingsPopover'
 import Stats from './components/Stats'
 import TheButton from './components/TheButton'
+import UpdateDebounceIndicator from './components/UpdateDebounceIndicator'
 import UpdateIndicator from './components/UpdateIndicator'
 import { GameProvider } from './contexts/GameContext'
 import { SettingsProvider } from './contexts/SettingsContext'
@@ -14,6 +15,7 @@ export default function Game() {
         <GameProvider>
           <Stats />
           <TheButton />
+          <UpdateDebounceIndicator />
           <UpdateIndicator />
           <ErrorIndicator />
         </GameProvider>

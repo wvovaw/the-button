@@ -1,7 +1,8 @@
 import { useAuth } from '@/hooks/useAuth'
 import { useDebounce, useEffectOnce, useUpdateEffect } from '@/hooks/usehooks-ts'
-import { createContext, type Dispatch, type PropsWithChildren, useContext, useMemo, useReducer } from 'react'
+import { createContext, type Dispatch, type PropsWithChildren, useContext, useMemo, useReducer, useRef } from 'react'
 
+import { GAME_CONFIG } from '../../constants'
 import { clickAction } from './actions/clickAction'
 import { getRecordAction } from './actions/getRecordAction'
 import { pushRecordAction } from './actions/pushRecordAction'
@@ -25,8 +26,10 @@ function GameProvider({ children }: PropsWithChildren) {
     isUpdating: false,
     errorMessage: '',
     userId,
+    isInitialLoadComplete: false,
   }
   const [state, dispatch] = useReducer(gameReducer, initialState)
+  const lastPushedCounter = useRef<number>(0)
 
   // This effects runs only on mount
   useEffectOnce(() => {
@@ -38,9 +41,13 @@ function GameProvider({ children }: PropsWithChildren) {
     FIXME: If clicks stoped at the same value as before effect won't run.
            Changig it to totalClicks fires effect twice because it is being reset after request
   */
-  const debouncedCounter = useDebounce(state.stats.counter, 2000)
+  const debouncedCounter = useDebounce(state.stats.counter, GAME_CONFIG.UPDATE_DEBOUNCE)
   useUpdateEffect(() => {
-    pushRecordAction(dispatch, state)
+    // Only push record if initial load is complete, we're not currently updating, and counter actually changed
+    if (state.isInitialLoadComplete && !state.isUpdating && debouncedCounter !== lastPushedCounter.current) {
+      lastPushedCounter.current = debouncedCounter
+      pushRecordAction(dispatch, state)
+    }
   }, [debouncedCounter])
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch])

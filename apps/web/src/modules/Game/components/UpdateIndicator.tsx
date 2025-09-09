@@ -7,5 +7,5 @@ export default function UpdateIndicator() {
 
   const { isUpdating } = game.state
 
-  return <>{isUpdating && <Loader2 className="absolute bottom-4 h-10 w-10 animate-spin text-accent duration-500" />}</>
+  return <>{isUpdating && <Loader2 className="text-accent absolute bottom-4 h-10 w-10 animate-spin duration-500" />}</>
 }
