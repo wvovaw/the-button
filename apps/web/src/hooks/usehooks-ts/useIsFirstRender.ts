@@ -7,7 +7,5 @@ export function useIsFirstRender(): boolean {
     isFirst.current = false
 
     return true
-  }
-
-  return isFirst.current
+  } else return false
 }
