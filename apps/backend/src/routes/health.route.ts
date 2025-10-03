@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify'
-import prisma from '../utils/prisma'
+import db from '@/db'
 
 async function healthcheckRoute(server: FastifyInstance) {
   server.get(
@@ -27,7 +27,7 @@ async function healthcheckRoute(server: FastifyInstance) {
     },
     async (req, res) => {
       try {
-        await prisma.$queryRaw`SELECT 1`
+        await db.run(`SELECT 1`)
         res.status(200).send({ message: 'Healthy' })
       }
       catch {

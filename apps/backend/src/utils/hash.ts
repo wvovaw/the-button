@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer'
 import crypto from 'node:crypto'
 
 export function hashPassword(password: string) {
@@ -52,5 +53,8 @@ export function verifySignature({
   hmac.update(data)
   const signature = hmac.digest('hex')
 
-  return candidateSignature === signature
+  return crypto.timingSafeEqual(
+    Buffer.from(candidateSignature, 'utf-8'),
+    Buffer.from(signature, 'utf-8'),
+  )
 }

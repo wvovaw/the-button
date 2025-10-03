@@ -24,6 +24,11 @@ dist-ssr
 *.sw?
 
 .env
+!.env.example
 .vercel
 
-.eslintcache
+*/**/.eslintcache
+*/**/tsconfig.tsbuildinfo
+
+*/**/.prisma-client
+*.db

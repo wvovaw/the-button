@@ -1,12 +1,19 @@
-import type { Record as UserRecord } from '@prisma/client'
-import type { CreateRecordInput, GetRecordByOwnderIdInput, GetRecordsInput, UpdateRecordInput } from './record.schemas'
-import { Prisma } from '@prisma/client'
-import prisma from '../../utils/prisma'
+import type {
+  CreateRecordInput,
+  GetRecordByOwnderIdInput,
+  GetRecordsInput,
+  UpdateRecordInput,
+} from './record.schemas'
+import type { NewRecord, Record, User } from '@/db/schema'
+import { asc, count, desc, eq } from 'drizzle-orm'
+import db from '@/db'
+import { records, users } from '@/db/schema'
+
+export type UserRecord = Record & { owner: User }
 
 export async function createRecord(data: CreateRecordInput & { ownerId: number }): Promise<UserRecord> {
   try {
-    type RecordCreateData = Parameters<typeof prisma.record.create>[0]['data']
-    const record: RecordCreateData = {
+    const recordData = {
       ownerId: data.ownerId,
       average: 0,
       averageWeight: 0,
@@ -14,58 +21,74 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
       totalResets: 0,
       highscore: 0,
     }
+
     if (data.highscore)
-      record.highscore = data.highscore
+      recordData.highscore = data.highscore
     if (data.clicks)
-      record.totalClicks = data.clicks
+      recordData.totalClicks = data.clicks
     if (data.peaks) {
       const weight = data.peaks.length
-      record.average = data.peaks.reduce((acc, cur) => acc + cur) / weight
-      record.averageWeight = weight
-      record.totalResets = weight
+      recordData.average = data.peaks.reduce((acc, cur) => acc + cur) / weight
+      recordData.averageWeight = weight
+      recordData.totalResets = weight
     }
 
-    return await prisma.record.create({
-      data: record,
-      include: {
-        owner: true,
-      },
-    })
+    const [newRecord] = await db.insert(records).values(recordData).returning()
+
+    if (!newRecord) {
+      throw new Error('Failed to create record')
+    }
+
+    const [recordWithOwner] = await db
+      .select()
+      .from(records)
+      .innerJoin(users, eq(records.ownerId, users.id))
+      .where(eq(records.id, newRecord.id))
+
+    if (!recordWithOwner) {
+      throw new Error('Failed to fetch created record with owner')
+    }
+
+    return {
+      ...recordWithOwner.records,
+      owner: recordWithOwner.users,
+    }
   }
-  catch (e) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002') {
-        throw new Error(`The user with id ${data.ownerId} already has a Record associated with it`, {
-          cause: 409,
-        })
-      }
+  catch (e: any) {
+    if (e.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+      throw new Error(`The user with id ${data.ownerId} already has a Record associated with it`, {
+        cause: 409,
+      })
     }
     throw e
   }
 }
 
-export async function updateRecord(data: UpdateRecordInput & { ownerId: number }): Promise<UserRecord> {
+export async function updateRecord(data: UpdateRecordInput & { ownerId: number }) {
   try {
-    type RecordUpdateData = Parameters<typeof prisma.record.update>[0]['data']
-    const record: RecordUpdateData = {}
-
-    if (data.clicks)
-      record.totalClicks = { increment: data.clicks }
-    if (data.highscore)
-      record.highscore = data.highscore
-    if (data.peaks) {
-      const currentAverage = await prisma.record.findUnique({
-        where: {
-          ownerId: data.ownerId,
-        },
-        select: {
-          average: true,
-          averageWeight: true,
-        },
+    const updateData: Partial<NewRecord> = {}
+    const currentRecord = await db
+      .query
+      .records
+      .findFirst({
+        where: table => (eq(table.ownerId, data.ownerId)),
       })
-      const { average, averageWeight } = currentAverage ?? {
+
+    if (!currentRecord)
+      throw new Error('Can not update record. It\'s not found', { cause: 409 })
+
+    if (data.clicks) {
+      updateData.totalClicks = (currentRecord?.totalClicks ?? 0) + data.clicks
+    }
+
+    if (data.highscore)
+      updateData.highscore = data.highscore
+
+    if (data.peaks) {
+      const { average, averageWeight, totalResets } = currentRecord ?? {
         average: 0,
         averageWeight: 0,
+        totalResets: 0,
       }
 
       const w1 = averageWeight
@@ -74,49 +97,62 @@ export async function updateRecord(data: UpdateRecordInput & { ownerId: number }
       const X2 = data.peaks.reduce((acc, cur) => acc + cur)
       const w2 = data.peaks.length
 
-      record.average = (X1 + X2) / (w1 + w2)
-      record.averageWeight = w1 + w2
-
-      record.totalResets = { increment: data.peaks.length }
+      updateData.average = (X1 + X2) / (w1 + w2)
+      updateData.averageWeight = w1 + w2
+      updateData.totalResets = totalResets + data.peaks.length
     }
 
-    return await prisma.record.update({
-      where: {
-        ownerId: data.ownerId,
-      },
-      data: record,
-      include: {
-        owner: true,
-      },
-    })
-  }
-  catch (e) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2002') {
-        throw new Error(`The user with id ${data.ownerId} doesn not have a Record associated with them`, {
+    if (Object.keys(updateData).length !== 0) {
+      const [updatedRecord] = await db
+        .update(records)
+        .set(updateData)
+        .where(eq(records.ownerId, data.ownerId))
+        .returning()
+
+      if (!updatedRecord) {
+        throw new Error(`Record not found for ownerId ${data.ownerId}`, {
           cause: 404,
         })
       }
     }
-    throw e
+
+    const [recordWithOwner] = await db
+      .select()
+      .from(records)
+      .innerJoin(users, eq(records.ownerId, users.id))
+      .where(eq(records.id, currentRecord.id))
+
+    if (!recordWithOwner) {
+      throw new Error('Failed to fetch updated record with owner')
+    }
+
+    return {
+      ...recordWithOwner.records,
+      owner: recordWithOwner.users,
+    }
+  }
+  catch (e: unknown) {
+    if (e instanceof Error)
+      throw e
   }
 }
 
 export async function deleteRecord(ownerId: number) {
   try {
-    await prisma.record.delete({
-      where: {
-        ownerId,
-      },
-    })
+    const [result] = await db
+      .delete(records)
+      .where(eq(records.ownerId, ownerId))
+      .returning()
+
+    if (!result) {
+      throw new Error(`Record not found.`, {
+        cause: 404,
+      })
+    }
   }
   catch (e: unknown) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2025') {
-        throw new Error(`Record not found.`, {
-          cause: 404,
-        })
-      }
+    if (e instanceof Error) {
+      throw e
     }
   }
 }
@@ -126,59 +162,67 @@ export async function getRecords(data: GetRecordsInput) {
   const perPage = data.perPage ?? 25
   const offset = page * perPage
 
-  const [items, itemsCount] = await prisma.$transaction([
-    prisma.record.findMany({
-      take: perPage,
-      skip: offset,
-      select: {
-        id: true,
-        highscore: true,
-        totalClicks: true,
-        totalResets: true,
-        average: true,
-        owner: {
-          select: {
-            name: true,
-            id: true,
-          },
-        },
-        createdAt: true,
-        updatedAt: true,
+  const items = await db
+    .select({
+      id: records.id,
+      highscore: records.highscore,
+      totalClicks: records.totalClicks,
+      totalResets: records.totalResets,
+      average: records.average,
+      owner: {
+        id: users.id,
+        name: users.name,
       },
-      orderBy: [{ highscore: 'desc' }, { totalResets: 'asc' }],
-    }),
-    prisma.record.count(),
-  ])
+      createdAt: records.createdAt,
+      updatedAt: records.updatedAt,
+    })
+    .from(records)
+    .innerJoin(users, eq(records.ownerId, users.id))
+    .orderBy(desc(records.highscore), asc(records.totalResets))
+    .limit(perPage)
+    .offset(offset)
+
+  const [totalCount] = await db
+    .select({ count: count() })
+    .from(records)
+
+  if (!totalCount) {
+    throw new Error('Failed to get total count')
+  }
 
   return {
     data: items,
     meta: {
       page,
       perPage,
-      itemsCount,
+      itemsCount: totalCount.count,
     },
   }
 }
 
 export async function getRecordByOwnerId(params: GetRecordByOwnderIdInput) {
   try {
-    return await prisma.record.findUniqueOrThrow({
-      where: {
-        ownerId: Number(params.ownerId),
-      },
-      include: {
-        owner: true,
-      },
-    })
-  }
-  catch (e) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      if (e.code === 'P2025') {
-        throw new Error(`Record not found for ownerId ${params.ownerId}`, {
-          cause: 404,
-        })
-      }
+    const [result] = await db
+      .select()
+      .from(records)
+      .innerJoin(users, eq(records.ownerId, users.id))
+      .where(eq(records.ownerId, Number(params.ownerId)))
+      .limit(1)
+
+    if (!result) {
+      throw new Error(`Record not found for ownerId ${params.ownerId}`, {
+        cause: 404,
+      })
     }
-    throw e
+
+    return {
+      ...result.records,
+      owner: result.users,
+    }
+  }
+  catch (e: unknown) {
+    if (e instanceof Error) {
+      throw e
+    }
   }
 }

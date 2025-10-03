@@ -1,0 +1,42 @@
+services:
+  api:
+    container_name: the-button-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: backend
+    env_file:
+      - .env
+    ports:
+      - "7000:7000"
+    volumes:
+      - db-data:/app/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  webapp:
+    container_name: the-button-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      - app-network
+
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/16

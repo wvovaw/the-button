@@ -1,26 +1,20 @@
 import type { Statistics } from './statistics.schemas'
-import prisma from '../../utils/prisma'
+import { avg, count, sum } from 'drizzle-orm'
+import db from '@/db'
+import { records } from '@/db/schema'
 
 export async function getStatistics(): Promise<Statistics> {
-  const stats = await prisma.record.aggregate({
-    _sum: {
-      totalClicks: true,
-    },
-    _avg: {
-      highscore: true,
-    },
-    _count: {
-      ownerId: true,
-    },
-  })
-
-  const avgHighscore = stats._avg.highscore ?? 0
-  const playersCount = stats._count.ownerId
-  const totalClicks = stats._sum.totalClicks ?? 0
+  const [stats] = await db
+    .select({
+      totalClicks: sum(records.totalClicks),
+      avgHighscore: avg(records.highscore),
+      playersCount: count(records.ownerId),
+    })
+    .from(records)
 
   return {
-    avgHighscore,
-    playersCount,
-    totalClicks,
+    avgHighscore: Number.parseInt(stats?.avgHighscore ?? '0'),
+    playersCount: stats?.playersCount ?? 0,
+    totalClicks: Number(stats?.totalClicks ?? '0'),
   }
 }

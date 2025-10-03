@@ -12,7 +12,7 @@ const schema = z.object({
   SERVER_HOSTNAME: z.string().default('0.0.0.0'),
   JWT_SECRET: z.string(),
   SIGNATURE_SECRET: z.string(),
-  DATABASE_URL: z.string(),
+  DATABASE_FILENAME: z.string(),
   CORS_ALLOWED_ORIGINS: z.string().transform(val =>
     val.split(',').map(origin => origin.trim()),
   ),
@@ -35,10 +35,6 @@ export default async function (server: FastifyInstance) {
   const options: FastifyEnvOptions = {
     confKey: 'config',
     schema: zodToJsonSchema(schema),
-    dotenv: {
-      path: configFilePath,
-      debug: nodeEnv === 'development',
-    },
   }
 
   await server.register(fastifyEnv, options)
