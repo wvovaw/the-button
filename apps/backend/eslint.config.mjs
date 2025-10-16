@@ -12,4 +12,5 @@ export default antfu({
     quotes: 'single',
     semi: false,
   },
+  ignores: ['.drizzle'],
 })

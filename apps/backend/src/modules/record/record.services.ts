@@ -54,13 +54,12 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
       owner: recordWithOwner.users,
     }
   }
-  catch (e: any) {
-    if (e.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+  catch (e: unknown) {
+    if (e instanceof Error) {
       throw new Error(`The user with id ${data.ownerId} already has a Record associated with it`, {
         cause: 409,
       })
     }
-    throw e
   }
 }
 
