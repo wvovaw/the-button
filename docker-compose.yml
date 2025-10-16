@@ -1,5 +1,6 @@
 services:
   api:
+    image: ghcr.io/wvovaw/the-button-api:latest
     container_name: the-button-api
     build:
       context: .
@@ -16,6 +17,7 @@ services:
       - app-network
 
   webapp:
+    image: ghcr.io/wvovaw/the-button-web:latest
     container_name: the-button-web
     build:
       context: .

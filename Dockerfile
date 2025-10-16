@@ -12,6 +12,7 @@ RUN bun run build
 
 # ---------------- Web (nginx) stage ----------------
 FROM nginx:1.27-alpine AS web
+LABEL org.opencontainers.image.source https://github.com/wvovaw/the-button
 COPY --from=build /app/apps/web/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 ENV NODE_ENV=production
@@ -23,6 +24,7 @@ RUN chmod +x /docker-entrypoint.d/env.sh
 
 # ---------------- Backend stage ----------------
 FROM base AS backend
+LABEL org.opencontainers.image.source https://github.com/wvovaw/the-button
 COPY ./apps/backend/package.json .
 COPY ./apps/backend/entrypoint.sh /entrypoint.sh
 COPY ./apps/backend ./
