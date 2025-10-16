@@ -1,12 +1,14 @@
+import type {Dispatch, PropsWithChildren} from 'react';
+import type {GameActions, GameState} from './reducers/gameReducer';
+import { createContext,   useContext, useMemo, useReducer, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import { useDebounce, useEffectOnce, useUpdateEffect } from '@/hooks/usehooks-ts'
-import { createContext, type Dispatch, type PropsWithChildren, useContext, useMemo, useReducer, useRef } from 'react'
 
+import { useDebounce, useEffectOnce, useUpdateEffect } from '@/hooks/usehooks-ts'
 import { GAME_CONFIG } from '../../constants'
 import { clickAction } from './actions/clickAction'
 import { getRecordAction } from './actions/getRecordAction'
 import { pushRecordAction } from './actions/pushRecordAction'
-import { type GameActions, gameReducer, type GameState } from './reducers/gameReducer'
+import {  gameReducer  } from './reducers/gameReducer'
 
 const GameContext = createContext<{ state: GameState; dispatch: Dispatch<GameActions> } | null>(null)
 

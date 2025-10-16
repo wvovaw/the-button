@@ -1,5 +1,5 @@
-import type { RecordData } from '@/api/types'
 import type { ColumnDef } from '@tanstack/react-table'
+import type { RecordData } from '@/api/types'
 import { formatRelative } from 'date-fns/formatRelative'
 import { enUS as en } from 'date-fns/locale/en-US'
 

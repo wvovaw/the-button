@@ -1,6 +1,7 @@
-import { cn } from '@/lib/utils'
+import type {HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes} from 'react';
+import { forwardRef    } from 'react'
 
-import { forwardRef, type HTMLAttributes, type TdHTMLAttributes, type ThHTMLAttributes } from 'react'
+import { cn } from '@/lib/utils'
 
 const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">

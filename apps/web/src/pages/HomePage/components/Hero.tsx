@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button'
-import { useAuth } from '@/hooks/useAuth'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { useAuth } from '@/hooks/useAuth'
 import { Stats } from './Stats'
 
 export function Hero() {

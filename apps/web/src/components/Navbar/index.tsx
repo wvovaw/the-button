@@ -1,4 +1,6 @@
 import type { MouseEvent } from 'react'
+import { ChevronDown, Lightbulb, LogOut, SettingsIcon, User } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,8 +12,6 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/compon
 import { Switch } from '@/components/ui/switch'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
-import { ChevronDown, Lightbulb, LogOut, SettingsIcon, User } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import { NavbarButtonLink, NavbarLink } from './components/Link'
 
 export default function Navbar() {

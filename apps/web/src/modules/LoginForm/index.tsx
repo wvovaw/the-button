@@ -1,17 +1,17 @@
-import type { UserProfile } from '@/providers/AuthProvider'
 import type { z } from 'zod'
-import { signIn } from '@/api/services/signin'
-import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-
-import { useAuth } from '@/hooks/useAuth'
+import type { UserProfile } from '@/providers/AuthProvider'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { jwtDecode } from 'jwt-decode'
 import { Loader2 } from 'lucide-react'
 import { useState } from 'react'
+
 import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { signIn } from '@/api/services/signin'
+import { Button } from '@/components/ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useAuth } from '@/hooks/useAuth'
 import { loginSchema } from './schema'
 
 export function LoginForm() {

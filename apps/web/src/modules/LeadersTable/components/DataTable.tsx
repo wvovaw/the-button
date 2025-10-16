@@ -2,7 +2,6 @@ import type {
   ColumnDef,
   PaginationState,
   SortingState} from '@tanstack/react-table';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import {
   flexRender,
   getCoreRowModel,
@@ -10,6 +9,7 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 import { useMemo, useState } from 'react'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { DataTableSkeleton } from './DataTableSkeleton'
 import TablePagination from './TablePagination'
 
