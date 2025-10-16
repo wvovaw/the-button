@@ -1,6 +1,5 @@
 import { getRecordsPaginated } from '@/api/services/getRecords'
 import { useEffect, useState } from 'react'
-// import { getRecordsPaginated } from "../api/mockGetRecords";
 import type { RecordsPaginatedResponseData } from '@/api/types'
 import type { PaginationState } from '@tanstack/react-table'
 

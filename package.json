@@ -3,14 +3,13 @@
   "version": "1.0.0",
   "private": "true",
   "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "dev": "pnpm --stream -r run dev",
-    "lint": "pnpm --stream -r run lint",
-    "build": "pnpm --stream -r run build",
-    "format": "pnpm --stream -r run format",
-    "typecheck": "pnpm --stream -r run typecheck",
-    "compose:up": "podman-compose -f docker-compose.dev.yml up -d",
-    "compose:down": "podman-compose -f docker-compose.dev.yml down"
-  },
-  "packageManager": "pnpm@9.12.3"
+    "dev": "bun run --filter '*' --elide-lines=0 dev",
+    "lint": "bun run --filter '*' --elide-lines=0 lint",
+    "build": "bun run --filter '*' --elide-lines=0 build",
+    "typecheck": "bun run --filter '*' --elide-lines=0 typecheck"
+  }
 }

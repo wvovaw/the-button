@@ -1,19 +1,14 @@
-FROM node:24-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
-RUN apt-get update -y && apt-get install -y openssl
-
+FROM oven/bun:1.3.0 AS base
 
 # ---------------- Build stage ----------------
 FROM base AS build
 WORKDIR /app
-COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+COPY package.json bun.lockb ./
 COPY apps/web/package.json apps/web/
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm install --frozen-lockfile
+COPY apps/backend/package.json apps/backend/
+RUN bun install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN bun run build
 
 
 # ---------------- Web (nginx) stage ----------------
