@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction} from 'react';
+import type { Dispatch, SetStateAction } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 
 import { useEventCallback } from './useEventCallback'
@@ -44,6 +44,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T
 
     try {
       // Allow value to be a function so we have the same API as useState
+      // @ts-expect-error don't care
       const newValue = typeof value === 'function' ? value(storedValue) : value
 
       // Save to local storage
@@ -60,6 +61,8 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, SetValue<T
   })
 
   useEffect(() => {
+    // FIXME: replace this lib with a hooks package
+    // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
     setStoredValue(readValue())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -89,7 +92,7 @@ function parseJSON<T>(value: string | null): T | undefined {
   try {
     return value === 'undefined' ? undefined : JSON.parse(value ?? '')
   } catch {
-    console.log('parsing error on', { value })
+    console.error('parsing error on', { value })
     return undefined
   }
 }

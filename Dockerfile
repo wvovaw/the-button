@@ -1,13 +1,12 @@
-FROM oven/bun:1.3.0 AS base
+FROM oven/bun:1.3.0-slim AS base
 
 # ---------------- Build stage ----------------
 FROM base AS build
 WORKDIR /app
-COPY package.json bun.lockb ./
+COPY package.json bun.lock ./
 COPY apps/web/package.json apps/web/
-COPY apps/backend/package.json apps/backend/
-RUN bun install --frozen-lockfile
-COPY . .
+RUN bun install 
+COPY apps/web apps/web
 RUN bun run build
 
 
@@ -23,9 +22,8 @@ RUN chmod +x /docker-entrypoint.d/env.sh
 
 
 # ---------------- Backend stage ----------------
-FROM oven/bun:1.3.0 AS backend
+FROM base AS backend
 COPY ./apps/backend/package.json .
-COPY ./apps/backend/bun.lock .
 COPY ./apps/backend/entrypoint.sh /entrypoint.sh
 COPY ./apps/backend ./
 RUN chmod +x /entrypoint.sh

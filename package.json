@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "bun run --filter '*' --elide-lines=0 dev",
     "lint": "bun run --filter '*' --elide-lines=0 lint",
-    "build": "bun run --filter '*' --elide-lines=0 build",
+    "build": "bun run --filter '*' build",
     "typecheck": "bun run --filter '*' --elide-lines=0 typecheck"
   }
 }
