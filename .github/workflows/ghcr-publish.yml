@@ -56,9 +56,18 @@ jobs:
             ${{ env.IMAGE_WEB }}:latest
             ${{ env.IMAGE_WEB }}:${{ github.sha }}
 
-      - name: Delete old images
+      - name: Delete old API images
         uses: actions/delete-package-versions@v5
         with:
           package-name: the-button-api
+          package-type: container
+          num-old-versions-to-delete: 10
+          delete-only-pre-release-versions: false
+
+      - name: Delete old Web images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: the-button-web
+          package-type: container
           num-old-versions-to-delete: 10
           delete-only-pre-release-versions: false
