@@ -16,9 +16,8 @@ jobs:
       id-token: write
 
     env:
-      REGISTRY: ghcr.io
-      IMAGE_API: ghcr.io/${{ github.actor }}/the-button-api
-      IMAGE_WEB: ghcr.io/${{ github.actor }}/the-button-web
+      IMAGE_API: the-button-api
+      IMAGE_WEB: the-button-web
 
     steps:
       - name: Checkout repository
@@ -30,7 +29,7 @@ jobs:
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,8 +41,8 @@ jobs:
           target: backend
           push: true
           tags: |
-            ${{ env.IMAGE_API }}:latest
-            ${{ env.IMAGE_API }}:${{ github.sha }}
+            ghcr.io/${{ github.actor }}/${{ env.IMAGE_API }}:latest
+            ghcr.io/${{ github.actor }}/${{ env.IMAGE_API }}:${{ github.sha }}
 
       - name: Build and push Web image
         uses: docker/build-push-action@v6
@@ -53,21 +52,19 @@ jobs:
           target: web
           push: true
           tags: |
-            ${{ env.IMAGE_WEB }}:latest
-            ${{ env.IMAGE_WEB }}:${{ github.sha }}
+            ghcr.io/${{ github.actor }}/${{ env.IMAGE_WEB }}:latest
+            ghcr.io/${{ github.actor }}/${{ env.IMAGE_WEB }}:${{ github.sha }}
 
       - name: Delete old API images
         uses: actions/delete-package-versions@v5
         with:
-          package-name: the-button-api
+          package-name: ${{ env.IMAGE_API }}
           package-type: container
-          num-old-versions-to-delete: 10
           delete-only-pre-release-versions: false
 
       - name: Delete old Web images
         uses: actions/delete-package-versions@v5
         with:
-          package-name: the-button-web
+          package-name: ${{ env.IMAGE_WEB }}
           package-type: container
-          num-old-versions-to-delete: 10
           delete-only-pre-release-versions: false
