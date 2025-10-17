@@ -21,7 +21,7 @@ export function LoginForm() {
   const fromPage = location.state?.from?.pathname || '/'
 
   const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(loginSchema as any),
     defaultValues: {
       email: '',
       password: '',
@@ -58,7 +58,7 @@ export function LoginForm() {
     } catch (e: unknown) {
       setIsLoading(false)
       setLoginError(true)
-      console.log('Login failed: ', e)
+      console.error('Login failed: ', e)
     }
   }
 
