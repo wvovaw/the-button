@@ -1,0 +1,59 @@
+networks:
+  proxy:
+    external: true
+
+volumes:
+  db-data:
+
+services:
+  api:
+    image: ghcr.io/wvovaw/the-button-api:latest
+    container_name: the-button-api
+    restart: unless-stopped
+    volumes:
+      - db-data:/app/data
+    networks:
+      - proxy
+    environment:
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      JWT_SECRET: ${JWT_SECRET}
+      SIGNATURE_SECRET: ${SIGNATURE_SECRET}
+      DATABASE_FILENAME: ${DATABASE_FILENAME}
+    labels:
+      "traefik.enable": true
+      "traefik.docker.network": "proxy"
+      "traefik.http.routers.the-button-api.entrypoints": "http"
+      "traefik.http.routers.the-button-api.rule": "Host(`btnapi.${ROOT_DOMAIN}`)"
+      "traefik.http.middlewares.the-button-api-https-redirect.redirectscheme.scheme": "https"
+      "traefik.http.routers.the-button-api.middlewares": "the-button-api-https-redirect"
+      "traefik.http.routers.the-button-api-secure.entrypoints": "https"
+      "traefik.http.routers.the-button-api-secure.rule": "Host(`btnapi.${ROOT_DOMAIN}`)"
+      "traefik.http.routers.the-button-api-secure.tls": true
+      "traefik.http.routers.the-button-api-secure.service": "the-button-api"
+      "traefik.http.services.the-button-api.loadbalancer.server.scheme": "http"
+      "traefik.http.services.the-button-api.loadbalancer.server.port": "7000"
+
+  webapp:
+    image: ghcr.io/wvovaw/the-button-web:latest
+    container_name: the-button-web
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8089:80
+    environment:
+      WEB_API_URL: ${WEB_API_URL}
+      WEB_SIGNATURE_SECRET: ${SIGNATURE_SECRET}
+    labels:
+      "traefik.enable": true
+      "traefik.docker.network": "proxy"
+      "traefik.http.routers.the-button-web.entrypoints": "http"
+      "traefik.http.routers.the-button-web.rule": "Host(`btn.${ROOT_DOMAIN}`)"
+      "traefik.http.middlewares.the-button-web-https-redirect.redirectscheme.scheme": "https"
+      "traefik.http.routers.the-button-web.middlewares": "the-button-web-https-redirect"
+      "traefik.http.routers.the-button-web-secure.entrypoints": "https"
+      "traefik.http.routers.the-button-web-secure.rule": "Host(`btn.${ROOT_DOMAIN}`)"
+      "traefik.http.routers.the-button-web-secure.tls": true
+      "traefik.http.routers.the-button-web-secure.service": "the-button-web"
+      "traefik.http.services.the-button-web.loadbalancer.server.scheme": "http"
+      "traefik.http.services.the-button-web.loadbalancer.server.port": "80"

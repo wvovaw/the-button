@@ -1,4 +1,5 @@
 FROM oven/bun:1.3.0-slim AS base
+ENV NODE_ENV=production
 
 # ---------------- Build stage ----------------
 FROM base AS build
@@ -15,7 +16,6 @@ FROM nginx:1.27-alpine AS web
 LABEL org.opencontainers.image.source="https://github.com/wvovaw/the-button"
 COPY --from=build /app/apps/web/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-ENV NODE_ENV=production
 ENV APP_PREFIX=WEB_
 ENV ASSET_DIR=/usr/share/nginx/html
 COPY env.sh /docker-entrypoint.d/env.sh

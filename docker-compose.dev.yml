@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       target: backend
     env_file:
-      - .env
+      - .env.development
     ports:
       - "7000:7000"
     volumes:
@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
       target: web
     env_file:
-      - .env
+      - .env.development
     ports:
       - "80:80"
     restart: unless-stopped
