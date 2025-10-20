@@ -1,6 +1,6 @@
 import type {Dispatch, PropsWithChildren} from 'react';
 import type {GameActions, GameState} from './reducers/gameReducer';
-import { createContext,   useContext, useMemo, useReducer, useRef } from 'react'
+import { createContext,   use, useMemo, useReducer, useRef } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 
 import { useDebounce, useEffectOnce, useUpdateEffect } from '@/hooks/usehooks-ts'
@@ -53,11 +53,11 @@ function GameProvider({ children }: PropsWithChildren) {
   }, [debouncedCounter])
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch])
-  return <GameContext.Provider value={value}>{children}</GameContext.Provider>
+  return <GameContext value={value}>{children}</GameContext>
 }
 
 function useGame() {
-  const context = useContext(GameContext)
+  const context = use(GameContext)
   if (!context) {
     throw new Error('useGame must be used within a GameProvider')
   }

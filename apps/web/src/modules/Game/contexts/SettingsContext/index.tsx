@@ -1,6 +1,6 @@
 import type {Dispatch, PropsWithChildren} from 'react';
 import type {SettingsActions, SettingsState} from './reducers/settingsReducer';
-import { createContext,   useContext, useMemo, useReducer } from 'react'
+import { createContext,   use, useMemo, useReducer } from 'react'
 import { useEffectOnce, useLocalStorage, useUpdateEffect } from '@/hooks/usehooks-ts'
 import {  settingsReducer  } from './reducers/settingsReducer'
 
@@ -24,11 +24,11 @@ function SettingsProvider({ children }: PropsWithChildren) {
   }, [state])
 
   const value = useMemo(() => ({ state, dispatch }), [state, dispatch])
-  return <SettingsContext.Provider value={value}>{children}</SettingsContext.Provider>
+  return <SettingsContext value={value}>{children}</SettingsContext>
 }
 
 function useSettings() {
-  const context = useContext(SettingsContext)
+  const context = use(SettingsContext)
   if (context === undefined) {
     throw new Error('useSettings must be used within a SettingsProvider')
   }
