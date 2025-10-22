@@ -16,6 +16,7 @@ services:
       - proxy
     environment:
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      FRONTEND_URL: ${FRONTEND_URL}
       COOKIE_SECRET: ${COOKIE_SECRET}
       JWT_SECRET: ${JWT_SECRET}
       SIGNATURE_SECRET: ${SIGNATURE_SECRET}
@@ -27,11 +28,11 @@ services:
       "traefik.enable": true
       "traefik.docker.network": "proxy"
       "traefik.http.routers.the-button-api.entrypoints": "http"
-      "traefik.http.routers.the-button-api.rule": "Host(`btnapi.${ROOT_DOMAIN}`)"
+      "traefik.http.routers.the-button-api.rule": "Host(`btn.${ROOT_DOMAIN}`) && PathPrefix(`/api`)"
       "traefik.http.middlewares.the-button-api-https-redirect.redirectscheme.scheme": "https"
       "traefik.http.routers.the-button-api.middlewares": "the-button-api-https-redirect"
       "traefik.http.routers.the-button-api-secure.entrypoints": "https"
-      "traefik.http.routers.the-button-api-secure.rule": "Host(`btnapi.${ROOT_DOMAIN}`)"
+      "traefik.http.routers.the-button-api-secure.rule": "Host(`btn.${ROOT_DOMAIN}`) && PathPrefix(`/api`)"
       "traefik.http.routers.the-button-api-secure.tls": true
       "traefik.http.routers.the-button-api-secure.service": "the-button-api"
       "traefik.http.services.the-button-api.loadbalancer.server.scheme": "http"
