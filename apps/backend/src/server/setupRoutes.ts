@@ -15,6 +15,6 @@ export default function (server: FastifyInstance) {
   server.register(userRouter, { prefix: 'api/users' })
   server.register(recordRouter, { prefix: 'api/records' })
   server.register(statisticsRouter, { prefix: 'api/statistics' })
-  server.register(authRouter, { prefix: 'api' })
-  server.register(healthcheckRoute, { prefix: 'api' })
+  server.register(authRouter, { prefix: 'api/oauth' })
+  server.register(healthcheckRoute, { prefix: 'api/health' })
 }

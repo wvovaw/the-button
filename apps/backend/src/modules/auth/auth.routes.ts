@@ -4,7 +4,7 @@ import { getGoogleOauthUrl, googleOauthHandler, me, signOut } from "./auth.contr
 
 async function authRoutes(server: FastifyInstance) {
   server.get(
-    '/oauth/google/callback',
+    '/google/callback',
     {
       schema: {
         querystring: $ref('googleOauthCallbackQueryStringSchema'),
@@ -30,7 +30,7 @@ async function authRoutes(server: FastifyInstance) {
   )
 
   server.get(
-    '/oauth/google/url', {
+    '/google/url', {
       schema: {
         response: {
           200: {
@@ -46,7 +46,7 @@ async function authRoutes(server: FastifyInstance) {
   )
 
   server.get(
-    '/oauth/me',
+    '/me',
     {
       preHandler: [server.authenticate],
       schema: {
@@ -63,7 +63,7 @@ async function authRoutes(server: FastifyInstance) {
   )
 
   server.get(
-    '/oauth/signout',
+    '/signout',
     {
       schema: {
         response: {

@@ -3,7 +3,7 @@ import db from '@/db'
 
 async function healthcheckRoute(server: FastifyInstance) {
   server.get(
-    '/health',
+    '/',
     {
       schema: {
         response: {
