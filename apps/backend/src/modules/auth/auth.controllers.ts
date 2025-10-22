@@ -40,7 +40,7 @@ export async function googleOauthHandler(
     reply.setCookie('accessToken', accessToken, {
       httpOnly: true,
       secure: isProd,
-      sameSite: isProd ? 'strict' : 'lax',
+      sameSite: 'lax',
       path: '/',
       maxAge: 14 * 24 * 60 * 60 // 14d
     })
