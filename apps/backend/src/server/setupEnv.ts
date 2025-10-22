@@ -13,6 +13,12 @@ const schema = z.object({
   JWT_SECRET: z.string(),
   SIGNATURE_SECRET: z.string(),
   DATABASE_FILENAME: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  GOOGLE_REDIRECT_URL: z.string(),
+  COOKIE_SECRET: z.string(),
+  COOKIE_DOMAIN: z.string(),
+  FRONTEND_URL: z.string(),
   CORS_ALLOWED_ORIGINS: z.string().transform(val =>
     val.split(',').map(origin => origin.trim()),
   ),

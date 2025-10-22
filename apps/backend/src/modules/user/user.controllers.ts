@@ -1,7 +1,6 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
-import type { CreateUserInput, LoginInput } from './user.schemas'
-import { verifyPassword } from '../../utils/hash'
-import { createUser, findUserByEmail, findUsers } from './user.services'
+import type { CreateUserInput } from './user.schemas'
+import { createUser, findUsers } from './user.services'
 
 export async function registerUserHandler(
   request: FastifyRequest<{
@@ -14,44 +13,6 @@ export async function registerUserHandler(
   return reply.code(201).send(user)
 }
 
-export async function loginHandler(
-  request: FastifyRequest<{
-    Body: LoginInput
-  }>,
-  reply: FastifyReply,
-) {
-  const body = request.body
-
-  // find a user by email
-  const user = await findUserByEmail(body.email)
-
-  if (!user) {
-    return reply.code(401).send(
-      new Error('Invalid email or password', {
-        cause: 401,
-      }),
-    )
-  }
-
-  // verify password
-  const correctPassword = verifyPassword({
-    candidatePassword: body.password,
-    salt: user.salt,
-    hash: user.password,
-  })
-
-  if (correctPassword) {
-    const { password: _pass, salt: _salt, ...rest } = user
-    // generate access token
-    return { accessToken: request.jwt.sign(rest) }
-  }
-
-  return reply.code(401).send(
-    new Error('Invalid email or password', {
-      cause: 401,
-    }),
-  )
-}
 
 export async function getUsersHandler() {
   const users = await findUsers()

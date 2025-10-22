@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "The Button API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

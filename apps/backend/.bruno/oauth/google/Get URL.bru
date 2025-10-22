@@ -1,0 +1,15 @@
+meta {
+  name: Get URL
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{HOST}}/api/oauth/google/url
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

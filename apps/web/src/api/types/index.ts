@@ -1,19 +1,11 @@
-export interface SignUpRequestData {
-  email: string
-  name: string
-  password: string
+export interface GetGoogleOauthUrlResponse {
+  url: string
 }
-export interface SignUpResponseData {
+
+export interface UserProfile {
   id: number
-  email: string
   name: string
-}
-export interface SignInRequestData {
   email: string
-  password: string
-}
-export interface SignInResponseData {
-  accessToken: string
 }
 export interface PostRecordRequesData {
   highscore?: number

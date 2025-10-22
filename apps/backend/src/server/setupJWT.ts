@@ -24,7 +24,7 @@ export default function (server: FastifyInstance) {
   server.register(fjwt, {
     secret: server.config.JWT_SECRET,
     verify: {
-      extractToken: request => request.headers.authorization?.split(' ').at(1),
+      extractToken: request => request.cookies.accessToken,
     },
   })
 
@@ -33,7 +33,7 @@ export default function (server: FastifyInstance) {
       await request.jwtVerify()
     }
     catch (e) {
-      return reply.send(e)
+      return reply.status(401).send({ error: 'Unauthorized' })
     }
   })
 

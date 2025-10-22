@@ -5,8 +5,7 @@ export const users = sqliteTable('users', {
   id: int('id').primaryKey({ autoIncrement: true }),
   email: text('email', { length: 255 }).notNull().unique(),
   name: text('name', { length: 255 }).unique(),
-  password: text('password').notNull(),
-  salt: text('salt').notNull(),
+  googleId: text('googleId', { length: 255 }).unique()
 })
 
 export const records = sqliteTable('records', {

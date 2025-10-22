@@ -1,5 +1,5 @@
 import type { FastifyInstance } from 'fastify'
-import { getUsersHandler, loginHandler, registerUserHandler } from './user.controllers'
+import { getUsersHandler, registerUserHandler } from './user.controllers'
 import { $ref } from './user.schemas'
 
 async function userRoutes(server: FastifyInstance) {
@@ -28,33 +28,6 @@ async function userRoutes(server: FastifyInstance) {
       },
     },
     registerUserHandler,
-  )
-
-  server.post(
-    '/login',
-    {
-      schema: {
-        body: $ref('loginSchema'),
-        response: {
-          200: {
-            ...$ref('loginResponseSchema'),
-            description: 'Successfully authorized',
-          },
-          401: {
-            description: 'Invalid user credentials provided',
-            type: 'object',
-            properties: {
-              statusCode: { type: 'number', default: 401 },
-              error: { type: 'string', default: 'Unauthorized' },
-              message: { type: 'string' },
-            },
-          },
-        },
-        description: 'Returns authorization token',
-        tags: ['User'],
-      },
-    },
-    loginHandler,
   )
 
   server.get(

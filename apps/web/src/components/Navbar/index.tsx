@@ -12,7 +12,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/compon
 import { Switch } from '@/components/ui/switch'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/hooks/useTheme'
-import { NavbarButtonLink, NavbarLink } from './components/Link'
+import { NavbarLink } from './components/Link'
 
 export default function Navbar() {
   return (
@@ -55,7 +55,7 @@ function UsernameOrLogin({ className }: { className?: string }) {
         <NavigationMenuItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="group my-2 flex items-center">
-              <span className="select-none text-base font-semibold text-foreground/80">{authCtx.user?.name}</span>
+              <span className="text-foreground/80 text-base font-semibold select-none">{authCtx.user?.name}</span>
               <ChevronDown
                 className="relative top-[1px] ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
                 aria-hidden="true"
@@ -94,10 +94,6 @@ function UsernameOrLogin({ className }: { className?: string }) {
         <NavigationMenuItem>
           <NavbarLink to="/signin">Sign in</NavbarLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavbarButtonLink to="/signup">Sign up</NavbarButtonLink>
-        </NavigationMenuItem>
       </NavigationMenuList>
     )
 }
-

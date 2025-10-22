@@ -60,6 +60,7 @@ export async function createRecord(data: CreateRecordInput & { ownerId: number }
         cause: 409,
       })
     }
+    throw e
   }
 }
 

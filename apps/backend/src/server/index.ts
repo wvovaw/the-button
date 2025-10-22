@@ -8,6 +8,7 @@ import setupErrorHandler from './setupErrorHandler'
 import setupJWT from './setupJWT'
 import setupRoutes from './setupRoutes'
 import setupSwagger from './setupSwagger'
+import setupCookie from './setupCookie'
 
 export default async function () {
   const loggerConfig: Record<string, PinoLoggerOptions | boolean> = {
@@ -34,6 +35,7 @@ export default async function () {
 
   await setupEnv(server)
   setupErrorHandler(server)
+  setupCookie(server)
   setupCors(server)
   setupJWT(server)
   setupSwagger(server)

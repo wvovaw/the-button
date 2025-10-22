@@ -1,44 +1,35 @@
-import type {PropsWithChildren} from 'react';
-import { createContext,  useCallback, useEffect, useMemo } from 'react'
-import client from '@/api/client'
+import type { PropsWithChildren } from 'react'
+import type { AuthContextType } from './AuthContext'
+import type { UserProfile } from '@/api/types'
+import { useCallback, useMemo } from 'react'
+import { signOut as apiSignOut } from '@/api/services/auth'
 import { useLocalStorage } from '@/hooks/usehooks-ts'
-
-export interface UserProfile {
-  id: number
-  name: string
-  email: string
-  accessToken: string
-}
-
-type SignInFnType = (params: UserProfile, cb: () => void) => void
-type SignOutFnType = (cb: () => void) => void
-type IsAuthenticated = () => boolean
-
-interface AuthContextType {
-  user: UserProfile | null
-  signIn: SignInFnType
-  signOut: SignOutFnType
-  isAuthenticated: IsAuthenticated
-}
-export const AuthContext = createContext<AuthContextType | null>(null)
+import { AuthContext } from './AuthContext'
 
 export function AuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useLocalStorage<UserProfile | null>('user-profile', null)
 
-  useEffect(() => {
-    if (user) client.defaults.headers.common.Authorization = `Bearer ${user.accessToken}`
-    else delete client.defaults.headers.common.Authorization
-  }, [user])
-
-  const signIn = useCallback((user: UserProfile, cb: () => void) => {
-    setUser(user)
-    cb()
-  }, [])
-  const signOut = useCallback((cb: () => void) => {
-    setUser(null)
-    cb()
-  }, [])
-  const isAuthenticated = useCallback(() => (!!(user && user.accessToken)), [user])
+  const signIn = useCallback(
+    (user: UserProfile, cb: () => void) => {
+      setUser(user)
+      cb()
+    },
+    [setUser],
+  )
+  const signOut = useCallback(
+    async (cb: () => void) => {
+      try {
+        await apiSignOut()
+      } catch (error) {
+        console.error('Sign out API error:', error)
+      } finally {
+        setUser(null)
+        cb()
+      }
+    },
+    [setUser],
+  )
+  const isAuthenticated = useCallback(() => !!user, [user])
 
   const value: AuthContextType = useMemo(
     () => ({

@@ -1,0 +1,15 @@
+meta {
+  name: Callback
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{HOST}}/api/oauth/google/callback
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,21 +1,11 @@
 import type { CreateUserInput } from './user.schemas'
-import { DrizzleQueryError } from 'drizzle-orm'
+import { DrizzleQueryError, eq } from 'drizzle-orm'
 import db from '@/db'
 import { users } from '@/db/schema'
-import { hashPassword } from '@/utils/hash'
 
 export async function createUser(input: CreateUserInput) {
-  const { password, ...rest } = input
-
-  const { hash, salt } = hashPassword(password)
-
   try {
-    const [user] = await db.insert(users).values({
-      ...rest,
-      salt,
-      password: hash,
-    }).returning()
-
+    const [user] = await db.insert(users).values(input).returning()
     return user
   }
   catch (e) {
@@ -32,6 +22,16 @@ export async function findUserByEmail(emailInput: string) {
   return db.query.users.findFirst({
     where: (users, { eq }) => eq(users.email, emailInput),
   })
+}
+
+export async function findUserById(id: number) {
+  return db.query.users.findFirst({
+    where: (users, { eq }) => eq(users.id, id),
+  })
+}
+
+export async function updateUserGoogleId(userId: number, googleId: string) {
+  return db.update(users).set({ googleId }).where(eq(users.id, userId)).returning()
 }
 
 export async function findUsers() {

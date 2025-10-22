@@ -6,5 +6,6 @@ export default function (server: FastifyInstance) {
   server.register(cors, {
     origin: allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+    credentials: true
   })
 }
